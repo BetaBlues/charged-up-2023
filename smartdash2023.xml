@@ -1,0 +1,22 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
+		<location x="28" y="126"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="0" y="0"/>
+	</static-widget>
+	<widget field="Test " type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="42" y="62"/>
+		<width>150</width>
+	</widget>
+</dashboard>
+<live-window>
+	<widget field="Chassis" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="138" y="86"/>
+	</widget>
+	<widget field="Ungrouped" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="104" y="145"/>
+	</widget>
+</live-window>
+</xml>

@@ -52,8 +52,28 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    
+    SmartDashboard.putNumber("Voltage", m_pdh.getVoltage());
+    SmartDashboard.putNumber("Gyro Direction", m_robotContainer.gyro.getAngle());
+    SmartDashboard.putNumber("Front Right Voltage", m_robotContainer.m_chassis.rightFrontMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Front Left Voltage", m_robotContainer.m_chassis.leftFrontMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Back Right Voltage", m_robotContainer.m_chassis.rightRearMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Back Left Voltage", m_robotContainer.m_chassis.leftRearMotor.getMotorOutputVoltage());
 
-    execute();
+    SmartDashboard.putNumber("FR port", m_pdh.getCurrent(15));
+    SmartDashboard.putNumber("FL port", m_pdh.getCurrent(18));
+    SmartDashboard.putNumber("BR port", m_pdh.getCurrent(3));
+    SmartDashboard.putNumber("BL port", m_pdh.getCurrent(1));
+    SmartDashboard.putNumber("test port", m_pdh.getCurrent(12));
+
+    /*SmartDashboard.putNumber("radio", m_pdh.getCurrent(20));
+    SmartDashboard.putNumber("roboRIO", m_pdh.getCurrent(23));
+    SmartDashboard.putNumber("motor", m_pdh.getCurrent(4));
+    SmartDashboard.putNumber("temp", m_pdh.getTemperature());
+    SmartDashboard.putNumber("total power", m_pdh.getTotalPower());
+    SmartDashboard.putNumber("total energy", m_pdh.getTotalEnergy());
+    SmartDashboard.putNumber("total current", m_pdh.getTotalCurrent()); */
+    
     
   }
 
@@ -94,7 +114,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {  }
 
   @Override
   public void testInit() {
@@ -116,20 +136,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
-}
 
-protected void execute(){
-  SmartDashboard.putNumber("Voltage", m_pdh.getVoltage());
-  SmartDashboard.putNumber("Gyro Direction", m_robotContainer.gyro.getAngle());
-  SmartDashboard.putNumber("Front Right Voltage", m_robotContainer.m_chassis.rightFrontMotor.getBusVoltage());
-  SmartDashboard.putNumber("Front Left Voltage", m_robotContainer.m_chassis.leftFrontMotor.getBusVoltage());
-  SmartDashboard.putNumber("Back Right Voltage", m_robotContainer.m_chassis.rightRearMotor.getBusVoltage());
-  SmartDashboard.putNumber("Back Left Voltage", m_robotContainer.m_chassis.leftRearMotor.getBusVoltage());
-  SmartDashboard.putNumber("radio", m_pdh.getCurrent(20));
-  SmartDashboard.putNumber("roboRIO", m_pdh.getCurrent(23));
-  SmartDashboard.putNumber("motor", m_pdh.getCurrent(4));
-  SmartDashboard.putNumber("temp", m_pdh.getTemperature());
-  SmartDashboard.putNumber("total power", m_pdh.getTotalPower());
-  SmartDashboard.putNumber("total energy", m_pdh.getTotalEnergy());
-  SmartDashboard.putNumber("total current", m_pdh.getTotalCurrent());
+
+  protected void execute(){
+    
+  }
 }

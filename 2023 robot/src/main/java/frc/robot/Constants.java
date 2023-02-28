@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -20,15 +22,15 @@ public final class Constants {
   
   public final class k_chassis {
     //Chassis Motor ports
-    public final static int leftFrontMotorID = 2;
-    public final static int rightFrontMotorID = 3;
+    public final static int leftFrontMotorID = 2; //2
+    public final static int rightFrontMotorID = 5; //5
     public final static int rightRearMotorID = 1;
-    public final static int leftRearMotorID = 0;
+    public final static int leftRearMotorID = 0;//0
 
     //chassis speeds
     
     //public double driveSpeed = 0;
-    //public double rotationSpeed = 0;
+    //public double rotationSpeesd = 0;
 
     public final static double normalDriveSpeed = 0.25;
     public final static double normalSidewaysDriveSpeed = 0.35;
@@ -38,6 +40,23 @@ public final class Constants {
 
     public final static double gyro = 0;
   }
+
+  public static class k_gripper {
+    public static final int NEO_SPARKMAX_ID = 9; //not final
+
+    public static final double MOTOR_RUN_SPEED = 0.3; //speeds aren't final either
+    public static final double MOTOR_CUBE_CLOSE_SPEED = -0.3; 
+    public static final double MOTOR_CONE_CLOSE_SPEED = -0.5; 
+    
+    public static final double OPEN_POSITION= 0.5; //placeholder values
+    public static final double CLOSE_POSITION = 1.0;
+
+    public static final double MOTOR_OPEN_SPEED = 0; 
+
+    public static final double coneTime = 1;
+    public static final double cubeTime = 1;
+
+}
 
   public final class k_xbox {
     //button numbers from 2021-22 Robot Code

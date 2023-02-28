@@ -11,8 +11,8 @@ public class DriveForTime extends CommandBase{
     public Timer timer;
     public double seconds;
 
-    public void DriveForTime(){
-        //this.seconds = seconds;
+    public void DriveForTime(double seconds){
+        this.seconds = seconds;
         new StartEndCommand(
         () -> Robot.m_robotContainer.m_chassis.driveCartesian(0, Constants.k_chassis.normalDriveSpeed, Constants.k_chassis.normalDriveSpeed),
         () -> Robot.m_robotContainer.m_chassis.driveCartesian(0, 0, 0),

@@ -17,6 +17,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import static frc.robot.Constants.k_gripper; 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class GripperSubsystem extends SubsystemBase {
     
@@ -35,15 +36,15 @@ public class GripperSubsystem extends SubsystemBase {
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
 
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 0);
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 15);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.open);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
         
 
         motorController = motor.getPIDController(); 
         limitSwitch = motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
         encoder = motor.getEncoder();
-        encoder.setPositionConversionFactor(100.0);
+        encoder.setPositionConversionFactor(360.0);
 
         motorController.setP(k_gripper.gripperP);
         motorController.setI(k_gripper.gripperP);
@@ -57,10 +58,6 @@ public class GripperSubsystem extends SubsystemBase {
 
     public boolean gripperSwitchState(){
         return limitSwitch.isPressed();
-    }
-    
-    public void stopExtender(){
-        motor.set(0);
     }
 
     public void setHome(){
@@ -80,15 +77,14 @@ public class GripperSubsystem extends SubsystemBase {
     }
     
     public void closeCone(){
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.coneClose);
         motor.set(-.1);
     }
     public void closeCube(){
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.cubeClose);
         motor.set(-.1);
     }
 
-    public void move(double speed){
-        motor.set(speed);
-    }
     public void stop(){
         motor.stopMotor();  
     }
@@ -99,24 +95,4 @@ public class GripperSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("Gripper LimSwitch", gripperSwitchState());
         SmartDashboard.putNumber("Gripper Position", encoder.getPosition());
     }
-
-/*   
-    public void open() {
-        motor.set(k_gripper.MOTOR_OPEN_SPEED);
-        isOpen = true;
-    }
-
-    public void closeCone() {
-        motor.set(k_gripper.MOTOR_CONE_CLOSE_SPEED);
-        isOpen = false; 
-    }
-    public void closeCube(){
-        motor.set(k_gripper.MOTOR_CUBE_CLOSE_SPEED);
-        isOpen = false;
-    }
-    
-    public void stop(){
-        motor.stopMotor();  
-    }
-*/
 }

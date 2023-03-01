@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.GripperSubsystem;
+import frc.robot.Constants;
+import frc.robot.Constants.k_gripper;
 
 public class GripperConeCommand extends CommandBase {
     
@@ -38,17 +40,16 @@ public class GripperConeCommand extends CommandBase {
     
     @Override
     public void end(boolean interrupted) {
-        gripperSubsystem.stop();
         gripperSubsystem.isOpen = !gripperSubsystem.isOpen;
     }
 
     @Override
     public boolean isFinished() {
         
-        if(gripperSubsystem.isOpen && gripperSubsystem.getPosition() <= 0){
+        if(gripperSubsystem.isOpen && gripperSubsystem.getPosition() <= Constants.k_gripper.coneClose){
             return true;
         }
-        else if(!gripperSubsystem.isOpen && gripperSubsystem.getPosition() >= 20){
+        else if(!gripperSubsystem.isOpen && gripperSubsystem.getPosition() >= Constants.k_gripper.open){
             return true;
         }
         return false;

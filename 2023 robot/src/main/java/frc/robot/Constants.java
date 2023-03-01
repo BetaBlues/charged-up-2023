@@ -56,6 +56,11 @@ public final class Constants {
     public static final double coneTime = 1;
     public static final double cubeTime = 1;
 
+    public static final int gripperID = 9;
+    public static final double gripperP = 0.0;
+    public static final double gripperD = 0.0;
+    public static final double gripperI = 0.0;
+
 }
 
   public final class k_xbox {

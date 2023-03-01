@@ -39,11 +39,19 @@ public class GripperCubeCommand extends CommandBase {
     
     @Override
     public void end(boolean interrupted) {
-        
+        gripperSubsystem.stop();
+        gripperSubsystem.isOpen = !gripperSubsystem.isOpen;
     }
 
     @Override
     public boolean isFinished() {
+        
+        if(gripperSubsystem.isOpen && gripperSubsystem.getPosition() <= 0){
+            return true;
+        }
+        else if(!gripperSubsystem.isOpen && gripperSubsystem.getPosition() >= 20){
+            return true;
+        }
         return false;
     }
 }

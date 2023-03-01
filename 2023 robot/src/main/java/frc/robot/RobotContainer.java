@@ -61,10 +61,10 @@ public class RobotContainer {
     //Trigger delicateDrive = new JoystickButton(m_chassisController, XboxController.Button.kA.value);
     //JoystickButton testButton = new JoystickButton(m_chassisController, XboxController.Button.kA.value);
     
-    new JoystickButton(m_chassisController, XboxController.Button.kB.value)
+    new JoystickButton(m_chassisController, XboxController.Button.kLeftBumper.value)
       .onTrue(new GripperConeCommand(gripper).withTimeout(Constants.k_gripper.coneTime));
     
-    new JoystickButton(m_chassisController, XboxController.Button.kA.value)
+    new JoystickButton(m_chassisController, XboxController.Button.kRightBumper.value)
       .onTrue(new GripperCubeCommand(gripper).withTimeout(Constants.k_gripper.cubeTime));
     
 

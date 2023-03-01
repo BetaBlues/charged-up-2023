@@ -61,6 +61,11 @@ public final class Constants {
     public static final double gripperD = 0.0;
     public static final double gripperI = 0.0;
 
+    public static final int open = 180;
+    public static final int coneClose = 45;
+    public static final int cubeClose = 90;
+    
+
 }
 
   public final class k_xbox {

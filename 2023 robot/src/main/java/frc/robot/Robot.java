@@ -54,18 +54,24 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     
     SmartDashboard.putNumber("Voltage", m_pdh.getVoltage());
-    SmartDashboard.putNumber("Gyro Direction", m_robotContainer.gyro.getAngle());
-    SmartDashboard.putNumber("Front Right Voltage", m_robotContainer.m_chassis.rightFrontMotor.getMotorOutputVoltage());
-    SmartDashboard.putNumber("Front Left Voltage", m_robotContainer.m_chassis.leftFrontMotor.getMotorOutputVoltage());
-    SmartDashboard.putNumber("Back Right Voltage", m_robotContainer.m_chassis.rightRearMotor.getMotorOutputVoltage());
-    SmartDashboard.putNumber("Back Left Voltage", m_robotContainer.m_chassis.leftRearMotor.getMotorOutputVoltage());
+    //SmartDashboard.putNumber("Gyro Direction", m_robotContainer.gyro.getAngle());
+    SmartDashboard.putNumber("Front Right Voltage", m_robotContainer.chassis.rightFrontMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Front Left Voltage", m_robotContainer.chassis.leftFrontMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Back Right Voltage", m_robotContainer.chassis.rightRearMotor.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Back Left Voltage", m_robotContainer.chassis.leftRearMotor.getMotorOutputVoltage());
 
     SmartDashboard.putNumber("FR port", m_pdh.getCurrent(15));
     SmartDashboard.putNumber("FL port", m_pdh.getCurrent(18));
     SmartDashboard.putNumber("BR port", m_pdh.getCurrent(3));
     SmartDashboard.putNumber("BL port", m_pdh.getCurrent(1));
     SmartDashboard.putNumber("test port", m_pdh.getCurrent(12));
+    
+    //SmartDashboard.putBoolean("Gripper LimSwitch", gripperSwitchState());
+    SmartDashboard.putNumber("Gripper Position", m_robotContainer.gripper.getPosition());
 
+
+
+    
     /*SmartDashboard.putNumber("radio", m_pdh.getCurrent(20));
     SmartDashboard.putNumber("roboRIO", m_pdh.getCurrent(23));
     SmartDashboard.putNumber("motor", m_pdh.getCurrent(4));

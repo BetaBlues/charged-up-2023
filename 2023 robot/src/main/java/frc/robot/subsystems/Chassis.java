@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,10 +19,10 @@ public class Chassis extends SubsystemBase {
   private MecanumDrive driveTrain;
 
   public Chassis() {
-    leftFrontMotor = new WPI_VictorSPX(Constants.k_chassis.leftFrontMotorID);
-    leftRearMotor = new WPI_VictorSPX(Constants.k_chassis.leftRearMotorID);
-    rightFrontMotor = new WPI_VictorSPX(Constants.k_chassis.rightFrontMotorID);
-    rightRearMotor = new WPI_VictorSPX(Constants.k_chassis.rightRearMotorID);
+    leftFrontMotor = new WPI_VictorSPX(Constants.chassisConstants.leftFrontMotorID);
+    leftRearMotor = new WPI_VictorSPX(Constants.chassisConstants.leftRearMotorID);
+    rightFrontMotor = new WPI_VictorSPX(Constants.chassisConstants.rightFrontMotorID);
+    rightRearMotor = new WPI_VictorSPX(Constants.chassisConstants.rightRearMotorID);
     rightFrontMotor.setInverted(true);
     rightRearMotor.setInverted(true);
   
@@ -33,10 +32,6 @@ public class Chassis extends SubsystemBase {
   public void driveCartesian(double zRotation, double ySpeed, double xSpeed) { //, Rotation2d gyroAngle
     driveTrain.driveCartesian(xSpeed, ySpeed, zRotation);
   }
-
-  /*public static void setMaxOutput(double maxSpeed) {
-    Chassis.setMaxOutput(0.5);
-  }*/
 
   @Override
   public void periodic() {

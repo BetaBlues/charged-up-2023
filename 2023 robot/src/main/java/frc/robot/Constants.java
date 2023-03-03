@@ -15,12 +15,13 @@ import edu.wpi.first.wpilibj.XboxController;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+  
+  public static class ControllerConstants {
+    public static final int driverPort = 0;
+    public static final int manipulatorPort = 1;
   }
   
-  public final class k_chassis {
+  public final class chassisConstants {
     //Chassis Motor ports
     public final static int leftFrontMotorID = 2; //2
     public final static int rightFrontMotorID = 5; //5
@@ -34,27 +35,13 @@ public final class Constants {
 
     public final static double normalDriveSpeed = 0.25;
     public final static double normalSidewaysDriveSpeed = 0.35;
-    public final static double slowDriveSpeed = 0.1;
     public final static double normalRotationSpeed = 0.3;
-    public final static double slowRotationSpeed = 0.1;
 
     public final static double gyro = 0;
   }
 
-  public static class k_gripper {
-    public static final int NEO_SPARKMAX_ID = 9; //not final
-
-    public static final double MOTOR_RUN_SPEED = 0.3; //speeds aren't final either
-    public static final double MOTOR_CUBE_CLOSE_SPEED = -0.3; 
-    public static final double MOTOR_CONE_CLOSE_SPEED = -0.5; 
-    
-    public static final double OPEN_POSITION= 0.5; //placeholder values
-    public static final double CLOSE_POSITION = 1.0;
-
-    public static final double MOTOR_OPEN_SPEED = 0; 
-
-    public static final double coneTime = 1;
-    public static final double cubeTime = 1;
+  public static class gripperConstants {
+    public static final int gripperNeoID = 9;
 
     public static final int gripperID = 9;
     public static final double gripperP = 0.0;
@@ -64,11 +51,47 @@ public final class Constants {
     public static final int open = 180;
     public static final int coneClose = 45;
     public static final int cubeClose = 90;
+
+    public static final double gripperSpeed = 0.05;
     
 
 }
 
-  public final class k_xbox {
+public static final class ShoulderConstants {
+  public static final int shoulderSparkMaxID = 9;
+  public static final double shoulderArmP = 0.0;
+  public static final double shoulderArmD = 0.0;
+  public static final double shoulderArmI = 0.0;
+  public static final double stopSpeed = 0.0;
+  public static final double shoulderFactor = 1.857142857;
+}
+
+public static final class ExtenderConstants {
+  public static final int extenderSparkMaxID = 3;
+  public static final double extenderArmP = 0.0;
+  public static final double extenderArmD = 0.0;
+  public static final double extenderArmI = 0.0;
+}
+
+public static class LevelConstants {
+  //angle constants
+  public static final double cone_levelOneRef_shoulder = 0.0;
+  public static final double cone_levelOneTarget_shoulder = 49.2678933;
+  public static final double cone_levelOneRef_extender = 0.0;
+  public static final double cone_levelOneTarget_extender = 0.0;
+
+  public static final double cone_levelTwoRef_shoulder = 0.0;
+  public static final double cone_levelTwoTarget_shoulder = 55.76253722;
+  public static final double cone_levelTwoRef_extender = 0.0;
+  public static final double cone_levelTwoTarget_extender = 0.0;
+}
+
+public static class ButtonConstants {
+  public static final int levelOneButton = XboxController.Button.kA.value;
+  public static final int levelTwoButton = XboxController.Button.kY.value;
+}
+
+  public final class xboxConstants {
     //button numbers from 2021-22 Robot Code
         public static final int buttonA = 2;
         public static final int buttonLeftBumper = 5;

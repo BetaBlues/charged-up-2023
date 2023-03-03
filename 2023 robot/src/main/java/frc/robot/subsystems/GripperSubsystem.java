@@ -14,7 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 
-import static frc.robot.Constants.k_gripper; 
+import static frc.robot.Constants.gripperConstants; 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -30,13 +30,13 @@ public class GripperSubsystem extends SubsystemBase {
     
     public GripperSubsystem() {
 
-        motor = new CANSparkMax(k_gripper.NEO_SPARKMAX_ID, MotorType.kBrushless);
-        isOpen = false;
+        motor = new CANSparkMax(gripperConstants.gripperNeoID, MotorType.kBrushless);
+        isOpen = true;
         
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
 
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.open);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.gripperConstants.open);
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
         
 
@@ -45,23 +45,24 @@ public class GripperSubsystem extends SubsystemBase {
 
         encoder = motor.getEncoder();
         encoder.setPositionConversionFactor(360.0);
-
-        motorController.setP(k_gripper.gripperP);
-        motorController.setI(k_gripper.gripperP);
-        motorController.setD(k_gripper.gripperP);
-
+        
+        /*
+        motorController.setP(gripperConstants.gripperP);
+        motorController.setI(gripperConstants.gripperP);
+        motorController.setD(gripperConstants.gripperP);
+         */
+        
         motor.setIdleMode(IdleMode.kBrake);
-
+        
+        encoder.setPosition(180);
+        motor.set(0);
+        
         motor.burnFlash();
 
     }
 
     public boolean gripperSwitchState(){
         return limitSwitch.isPressed();
-    }
-
-    public void setHome(){
-        encoder.setPosition(0);
     }
 
     public double getPosition(){
@@ -73,26 +74,28 @@ public class GripperSubsystem extends SubsystemBase {
     }
 
     public void open(){
-        motor.set(.1);
+        motor.set(Constants.gripperConstants.gripperSpeed);
     }
     
     public void closeCone(){
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.coneClose);
-        motor.set(-.1);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.gripperConstants.coneClose);
+        motor.set(-Constants.gripperConstants.gripperSpeed);
     }
     public void closeCube(){
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.k_gripper.cubeClose);
-        motor.set(-.1);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.gripperConstants.cubeClose);
+        motor.set(-Constants.gripperConstants.gripperSpeed);
     }
 
     public void stop(){
         motor.stopMotor();  
     }
-
-    @Override
+/*
+ * @Override
     public void periodic() {
         // This method will be called once per scheduler run
         SmartDashboard.putBoolean("Gripper LimSwitch", gripperSwitchState());
         SmartDashboard.putNumber("Gripper Position", encoder.getPosition());
     }
+ */
+    
 }

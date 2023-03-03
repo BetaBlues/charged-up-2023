@@ -25,8 +25,12 @@ public class LevelOneCommand extends CommandBase {
       // Called every time the scheduler runs while the command is scheduled.
       @Override
       public void execute() {
-        shoulderSub.levelOne(shoulderSub.getPosition());
-        extenderSub.levelOne(extenderSub.getPosition());
+        boolean shoulder = shoulderSub.levelOne(shoulderSub.getPosition());
+        boolean extension = extenderSub.levelOne(extenderSub.getPosition());
+        
+        if(shoulder && extension){
+          isFinished();
+        }
       }
     
       // Called once the command ends or is interrupted.

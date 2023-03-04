@@ -20,7 +20,7 @@ import frc.robot.Constants.ShoulderConstants;
 
 public class extenderSubsystem extends SubsystemBase {
   /** making variables */
-    public CANSparkMax extenderNEO;
+    public CANSparkMax extenderCIM;
     private SparkMaxPIDController extenderController;
     private SparkMaxLimitSwitch extenderSwitch;
     private RelativeEncoder extenderEncoder; 
@@ -30,10 +30,10 @@ public class extenderSubsystem extends SubsystemBase {
      */
     public extenderSubsystem() {
         /* giving substance to names */
-        extenderNEO = new CANSparkMax(ExtenderConstants.extenderSparkMaxID, MotorType.kBrushless);
+        extenderCIM = new CANSparkMax(ExtenderConstants.extenderSparkMaxID, MotorType.kBrushless);
         
-        extenderController = extenderNEO.getPIDController(); 
-        extenderSwitch = extenderNEO.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+        extenderController = extenderCIM.getPIDController(); 
+        extenderSwitch = extenderCIM.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
         extenderEncoder = extenderNEO.getEncoder();
         extenderEncoder.setPositionConversionFactor(100.0);
@@ -46,12 +46,6 @@ public class extenderSubsystem extends SubsystemBase {
 
     extenderNEO.burnFlash();
   }
-
-  /*public void c_levelOne(){
-    extenderController.setReference(ShoulderConstants.c_levelOneReference, CANSparkMax.ControlType.kPosition);
-    extenderEncoder.setPosition(ShoulderConstants.c_levelOneTarget);
-  }*/
-
 
   /**
    * Example command factory method.

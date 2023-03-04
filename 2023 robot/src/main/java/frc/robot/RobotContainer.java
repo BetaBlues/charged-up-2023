@@ -56,11 +56,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     
-    new JoystickButton(driver, XboxController.Button.kLeftBumper.value)
-      .onTrue(new GripperConeCommand(gripper));
+    // new JoystickButton(driver, XboxController.Button.kLeftBumper.value)
+    //   .onTrue(new GripperConeCommand(gripper));
     
-    new JoystickButton(driver, XboxController.Button.kRightBumper.value)
-      .onTrue(new GripperCubeCommand(gripper));
+    // new JoystickButton(driver, XboxController.Button.kRightBumper.value)
+    //   .onTrue(new GripperCubeCommand(gripper));
 
     new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(extenderSubsystem, shoulderSubsystem));
     new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(extenderSubsystem, shoulderSubsystem));

@@ -83,7 +83,7 @@ public class Chassis extends SubsystemBase {
           
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           //left AprilTagSpacing (negative value)
           new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ChargeStationConstants.AprilTagSpacing));
@@ -103,7 +103,7 @@ public class Chassis extends SubsystemBase {
           double tx = table.getEntry("tx").getDouble(0);
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           double current_distance = Estimate_Distance();
           
@@ -121,7 +121,7 @@ public class Chassis extends SubsystemBase {
           
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           //right AprilTagSpacing (positive value)
           new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ChargeStationConstants.AprilTagSpacing));
@@ -169,7 +169,7 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       //go left
       new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
@@ -181,7 +181,7 @@ public class Chassis extends SubsystemBase {
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
@@ -198,7 +198,7 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       double currentDistance = Estimate_Distance();
 
@@ -207,7 +207,7 @@ public class Chassis extends SubsystemBase {
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
@@ -224,7 +224,7 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       //go right
       new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
@@ -236,12 +236,12 @@ public class Chassis extends SubsystemBase {
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
 
-  public void findRightSpotX(double tx){
+  public void findCorrectSpotX(double tx){
     if(tx > 0)
       {
         new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
@@ -251,7 +251,7 @@ public class Chassis extends SubsystemBase {
         new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
       }
   }
-  public void findRightSpotY(double time, double distanceError){
+  public void findCorrectSpotY(double time, double distanceError){
     if(distanceError > 0) //goes forwards
       {
         new RunCommand(() -> driveCartesian(0, -Constants.chassisConstants.normalDriveSpeed, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)

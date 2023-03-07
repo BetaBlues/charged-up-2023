@@ -150,7 +150,7 @@ public class Chassis extends SubsystemBase {
           double currentDistance = Estimate_Distance();
           
           distanceError = desiredDistance - currentDistance;
-          drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
+          drivingAdjust = Constants.ChargeStationConstants.KpDistance * distanceError;
           
           //move backwards
           double time = DistanceToTimeCalculation(distanceError); 
@@ -180,6 +180,115 @@ public class Chassis extends SubsystemBase {
 
   public void ShoulderLineUpLeft()
   {
+    if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
+    {
+      double tx = table.getEntry("tx").getDouble(0);
+          
+      //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
+        //move -tx
+      if(tx > 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, 0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
+      else if(tx < 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, -0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
 
+      //go left
+      new RunCommand(() -> driveCartesian(0, 0, -0.3), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
+      
+      double currentDistance = Estimate_Distance();
+
+      distanceError = desiredDistance - currentDistance;
+      drivingAdjust = Constants.ShoulderDriveConstants.KpDistance * distanceError;
+          
+      //move backwards
+      double time = DistanceToTimeCalculation(distanceError); 
+      if(distanceError > 0) //goes forwards
+      {
+        new RunCommand(() -> driveCartesian(0, -0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      else if(distanceError < 0)//goes backwards
+      {
+        new RunCommand(() -> driveCartesian(0, 0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      
+    }
+  }
+
+  public void ShoulderLineUpCenter()
+  {
+    if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
+    {
+      double tx = table.getEntry("tx").getDouble(0);
+          
+      //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
+        //move -tx
+      if(tx > 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, 0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
+      else if(tx < 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, -0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
+
+      double currentDistance = Estimate_Distance();
+
+      distanceError = desiredDistance - currentDistance;
+      drivingAdjust = Constants.ShoulderDriveConstants.KpDistance * distanceError;
+          
+      //move backwards
+      double time = DistanceToTimeCalculation(distanceError); 
+      if(distanceError > 0) //goes forwards
+      {
+        new RunCommand(() -> driveCartesian(0, -0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      else if(distanceError < 0)//goes backwards
+      {
+        new RunCommand(() -> driveCartesian(0, 0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      
+    }
+  }
+
+  public void ShoulderLineUpRight()
+  {
+    if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
+    {
+      double tx = table.getEntry("tx").getDouble(0);
+          
+      //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
+        //move -tx
+      if(tx > 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, 0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
+      else if(tx < 0)
+      {
+        new RunCommand(() -> driveCartesian(0, 0, -0.3), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
+      }
+
+      //go right
+      new RunCommand(() -> driveCartesian(0, 0, 0.3), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
+      
+      double currentDistance = Estimate_Distance();
+
+      distanceError = desiredDistance - currentDistance;
+      drivingAdjust = Constants.ShoulderDriveConstants.KpDistance * distanceError;
+          
+      //move backwards
+      double time = DistanceToTimeCalculation(distanceError); 
+      if(distanceError > 0) //goes forwards
+      {
+        new RunCommand(() -> driveCartesian(0, -0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      else if(distanceError < 0)//goes backwards
+      {
+        new RunCommand(() -> driveCartesian(0, 0.3, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
+      }
+      
+    }
   }
 }

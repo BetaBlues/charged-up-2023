@@ -118,6 +118,13 @@ public static class ChargeStationConstants
     public static double limelightOffsetFromRobotCenter = 6.5; //in inches
 }
 
+public static class ShoulderDriveConstants
+{
+  public static double nodeSpacingFromAprilTag = 22.00; //inches
+  public static double desiredDistanceCS = 14.5; //inches
+  public static double limelightOffsetFromRobotCenter = 6.5; //inches
+}
+
 public static class ButtonConstants {
   public static final int levelOneButton = XboxController.Button.kA.value;
   public static final int levelTwoButton = XboxController.Button.kY.value;

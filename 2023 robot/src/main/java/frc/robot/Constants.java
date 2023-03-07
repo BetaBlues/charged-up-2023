@@ -29,15 +29,13 @@ public final class Constants {
     public final static int leftRearMotorID = 0;//0
 
     //chassis speeds
-    
-    //public double driveSpeed = 0;
-    //public double rotationSpeesd = 0;
-
     public final static double normalDriveSpeed = 0.25;
     public final static double normalSidewaysDriveSpeed = 0.35;
     public final static double normalRotationSpeed = 0.3;
 
     public final static double gyro = 0;
+
+    public final static double inPerSecSpeed = 1;
   }
 
   public static class gripperConstants {
@@ -48,6 +46,7 @@ public final class Constants {
     public static final double gripperD = 0.0;
     public static final double gripperI = 0.0;
 
+    public static final int start = 360;
     public static final int open = 180;
     public static final int coneClose = 45;
     public static final int cubeClose = 90;
@@ -84,6 +83,38 @@ public static class LevelConstants {
   public static final double cone_levelTwoTarget_shoulder = 55.76253722;
   public static final double cone_levelTwoRef_extender = 0.0;
   public static final double cone_levelTwoTarget_extender = 0.0;
+}
+
+//Estimate Distance
+public static class EstimateDistanceConstants
+{
+    final public static double limelightMountAngleDegrees = 15.0; // how many degrees back is your limelight rotated from perfectly vertical?
+    final public static double limelightLensHeightInches = 7.0; // distance from the center of the Limelight lens to the floor
+    final public static double goalHeightInches = 15.125; // bottom of AprilTag height (same for shoulder and drive use)
+}
+
+//Aim and Range
+public static class AimAndRangeConstants
+{
+    final public static double KpAim = -0.1; // Proportional control constant 
+    final public static double KpDistance = -0.1; // Proportional control constant for distance
+    final public static double min_aim_command = 0.03; // minimum amount of power to move robot
+}
+
+//Getting in Range
+public static class GettingInRangeConstants
+{
+    final public static double KpDistance = -0.1; // Proportional control constant for distance
+}
+
+//Seeking: None (that I can tell)
+
+//Charge Station
+public static class ChargeStationConstants
+{
+    public static double AprilTagSpacing = 66.00; //in inches
+    public static double desiredDistanceCS = 111.00; //in inches --> only for charge station
+    public static double limelightOffsetFromRobotCenter = 6.5; //in inches
 }
 
 public static class ButtonConstants {

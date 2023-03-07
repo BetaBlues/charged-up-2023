@@ -44,7 +44,7 @@ public class GripperSubsystem extends SubsystemBase {
         limitSwitch = motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
         encoder = motor.getEncoder();
-        encoder.setPositionConversionFactor(360.0);
+        encoder.setPositionConversionFactor(360);
         
         /*
         motorController.setP(gripperConstants.gripperP);
@@ -54,7 +54,7 @@ public class GripperSubsystem extends SubsystemBase {
         
         motor.setIdleMode(IdleMode.kBrake);
         
-        encoder.setPosition(180);
+        encoder.setPosition(Constants.gripperConstants.open);
         motor.set(0);
         
         motor.burnFlash();
@@ -65,12 +65,12 @@ public class GripperSubsystem extends SubsystemBase {
         return limitSwitch.isPressed();
     }
 
-    public double getPosition(){
-        return encoder.getPosition();
+    public void setPosition(int position){
+        encoder.setPosition(position);
     }
 
-    public void insideThrone(){
-        //do later
+    public double getPosition(){
+        return encoder.getPosition();
     }
 
     public void open(){
@@ -84,6 +84,10 @@ public class GripperSubsystem extends SubsystemBase {
     public void closeCube(){
         motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.gripperConstants.cubeClose);
         motor.set(-Constants.gripperConstants.gripperSpeed);
+    }
+
+    public void move(double speed){
+        motor.set(speed);
     }
 
     public void stop(){

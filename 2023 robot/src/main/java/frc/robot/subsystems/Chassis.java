@@ -41,4 +41,9 @@ public class Chassis extends SubsystemBase {
   public Object driveCartesian(double leftX, double leftY, double rightX, Chassis m_chassis) {
     return null;
   }
+
+  public void ShoulderLineUpLeft()
+  {
+
+  }
 }

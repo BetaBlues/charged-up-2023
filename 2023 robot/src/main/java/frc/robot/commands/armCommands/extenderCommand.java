@@ -29,7 +29,6 @@ public class extenderCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    extenderSub.setHome();
     extenderSub.move(0);
   }
 

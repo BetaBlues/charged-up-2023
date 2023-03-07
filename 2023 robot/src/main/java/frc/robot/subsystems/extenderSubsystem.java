@@ -47,12 +47,6 @@ public class extenderSubsystem extends SubsystemBase {
     extenderNEO.burnFlash();
   }
 
-  /*public void c_levelOne(){
-    extenderController.setReference(ShoulderConstants.c_levelOneReference, CANSparkMax.ControlType.kPosition);
-    extenderEncoder.setPosition(ShoulderConstants.c_levelOneTarget);
-  }*/
-
-
   /**
    * Example command factory method.
    *
@@ -97,14 +91,36 @@ public class extenderSubsystem extends SubsystemBase {
   }
 
   //levels
-  public void levelOne(double currentPos) {
+  public boolean levelOne(double currentPos) {
     //extenderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
-    extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
+    //extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
+    if(currentPos != LevelConstants.cone_levelOneTarget_extender && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
+      extenderNEO.set(0.3);
+    }
+    else if (currentPos != LevelConstants.cone_levelOneTarget_extender && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
+      extenderNEO.set(0.3);
+    }
+    else {
+      SmartDashboard.putBoolean("Level One Arm position extender", true);
+      return true;
+    }
+    return false;
   }
 
-  public void levelTwo(double currentPos) {
+  public boolean levelTwo(double currentPos) {
     //extenderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
-    extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
+    //extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
+    if(currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
+      extenderNEO.set(0.3);
+    }
+    else if (currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
+      extenderNEO.set(0.3);
+    }
+    else {
+      SmartDashboard.putBoolean("Level Two Arm position extender", true);
+      return true;
+    }
+    return false;
   }
 
 

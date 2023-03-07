@@ -81,6 +81,7 @@ public class shoulderSubsystem extends SubsystemBase {
   public double getPosition(){
     return shoulderEncoder.getPosition();
   }
+
 /*commands */
   public void stopShoulder(){
     shoulderNEO.set(ShoulderConstants.stopSpeed);
@@ -95,20 +96,36 @@ public class shoulderSubsystem extends SubsystemBase {
   }
 
 //levels
-  public void levelOne(double currentPos) {
+  public boolean levelOne(double currentPos) {
     //shoulderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
     //shoulderEncoder.setPosition(LevelConstants.cone_levelOneTarget_shoulder);
-    if(currentPos!= LevelConstants.cone_levelOneTarget_shoulder){
+    if(currentPos != LevelConstants.cone_levelOneTarget_shoulder && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
       shoulderNEO.set(0.3);
     }
+    else if (currentPos != LevelConstants.cone_levelOneTarget_shoulder && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
+      shoulderNEO.set(0.3);
+    }
+    else {
+      SmartDashboard.putBoolean("Level One Arm position shoulder", true);
+      return true;
+    }
+    return false;
   }
 
-  public void levelTwo(double currentPos) {
+  public boolean levelTwo(double currentPos) {
     //shoulderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
     //shoulderEncoder.setPosition(LevelConstants.cone_levelTwoTarget_shoulder);
-    if(currentPos!= LevelConstants.cone_levelTwoTarget_shoulder){
+    if(currentPos != LevelConstants.cone_levelTwoTarget_shoulder && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
       shoulderNEO.set(0.3);
     }
+    else if (currentPos != LevelConstants.cone_levelTwoTarget_shoulder && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
+      shoulderNEO.set(0.3);
+    }
+    else {
+      SmartDashboard.putBoolean("Level Two Arm position shoulder", true);
+      return true;
+    }
+    return false;
   }
 
   @Override

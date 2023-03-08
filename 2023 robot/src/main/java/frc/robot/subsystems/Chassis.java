@@ -88,7 +88,7 @@ public class Chassis extends SubsystemBase {
           
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           //left AprilTagSpacing (negative value)
           new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ChargeStationConstants.AprilTagSpacing));
@@ -108,8 +108,7 @@ public class Chassis extends SubsystemBase {
           double tx = table.getEntry("tx").getDouble(0);
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-              
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           double current_distance = Estimate_Distance();
           
@@ -127,7 +126,7 @@ public class Chassis extends SubsystemBase {
           
           //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
               //move -tx
-          findRightSpotX(tx);
+          findCorrectSpotX(tx);
           
           //right AprilTagSpacing (positive value)
           new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ChargeStationConstants.AprilTagSpacing));
@@ -166,7 +165,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpLeft()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -175,19 +173,19 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       //go left
       new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
       
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = Constants.ShoulderDriveConstants.desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
@@ -195,7 +193,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpCenter()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -204,16 +201,16 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = Constants.ShoulderDriveConstants.desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
@@ -221,7 +218,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpRight()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -230,24 +226,24 @@ public class Chassis extends SubsystemBase {
           
       //center robot --> parallel w/ AprilTag and AprilTag is centered w/ robot
         //move -tx
-      findRightSpotX(tx);
+      findCorrectSpotX(tx);
 
       //go right
       new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(Constants.ShoulderDriveConstants.nodeSpacingFromAprilTag));
       
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = Constants.ShoulderDriveConstants.desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards
       double time = DistanceToTimeCalculation(distanceError); 
-      findRightSpotY(time, distanceError);
+      findCorrectSpotY(time, distanceError);
       
     }
   }
 
-  public void findRightSpotX(double tx){
+  public void findCorrectSpotX(double tx){
     if(tx > 0)
       {
         new RunCommand(() -> driveCartesian(0, 0, Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
@@ -257,7 +253,7 @@ public class Chassis extends SubsystemBase {
         new RunCommand(() -> driveCartesian(0, 0, -Constants.chassisConstants.normalDriveSpeed), this).withTimeout(DistanceToTimeCalculation(-tx + Constants.ChargeStationConstants.limelightOffsetFromRobotCenter));
       }
   }
-  public void findRightSpotY(double time, double distanceError){
+  public void findCorrectSpotY(double time, double distanceError){
     if(distanceError > 0) //goes forwards
       {
         new RunCommand(() -> driveCartesian(0, -Constants.chassisConstants.normalDriveSpeed, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)

@@ -81,7 +81,8 @@ public class RobotContainer {
     
      */
     
-    
+    // new JoystickButton(driver, XboxController.Button.kRightBumper.value)
+    //   .onTrue(new GripperCubeCommand(gripper));
 
     //new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(extenderSubsystem, shoulderSubsystem));
     //new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(extenderSubsystem, shoulderSubsystem));

@@ -1,18 +1,14 @@
 package frc.robot.commands.armCommands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.extenderSubsystem;
 import frc.robot.subsystems.shoulderSubsystem;
 
 
 public class LevelTwoCommand extends CommandBase {
-    private final extenderSubsystem extenderSub;
     private final shoulderSubsystem shoulderSub;
     //private final XboxController manipulator;
 
-    public LevelTwoCommand(extenderSubsystem extenderSub, shoulderSubsystem shoulderSub) {
-        this.extenderSub = extenderSub;
+    public LevelTwoCommand(shoulderSubsystem shoulderSub) {
         this.shoulderSub = shoulderSub;
         //this.manipulator = manipulator;
       }
@@ -26,9 +22,8 @@ public class LevelTwoCommand extends CommandBase {
       @Override
       public void execute() {
         boolean shoulder = shoulderSub.levelTwo(shoulderSub.getPosition());
-        boolean extension = extenderSub.levelTwo(extenderSub.getPosition());
-        
-        if(shoulder && extension){
+
+        if(shoulder){
           isFinished();
         }
       }

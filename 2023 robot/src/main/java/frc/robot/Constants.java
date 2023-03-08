@@ -73,7 +73,7 @@ public static final class ExtenderConstants {
   public static final double extenderArmP = 0.0;
   public static final double extenderArmD = 0.0;
   public static final double extenderArmI = 0.0;
-  public static final double extenderFactor = 100.0;
+  //public static final double extenderFactor = 100.0;
 }
 
 public static class LevelConstants {
@@ -93,16 +93,8 @@ public static class LevelConstants {
 public static class EstimateDistanceConstants
 {
     final public static double limelightMountAngleDegrees = 15.0; // how many degrees back is your limelight rotated from perfectly vertical?
-    final public static double limelightLensHeightInches = 7.0; // distance from the center of the Limelight lens to the floor
+    final public static double limelightLensHeightInches = 8.125; // distance from the center of the Limelight lens to the floor
     final public static double goalHeightInches = 15.125; // bottom of AprilTag height (same for shoulder and drive use)
-}
-
-//Aim and Range
-public static class AimAndRangeConstants
-{
-    final public static double KpAim = -0.1; // Proportional control constant 
-    final public static double KpDistance = -0.1; // Proportional control constant for distance
-    final public static double min_aim_command = 0.03; // minimum amount of power to move robot
 }
 
 //Getting in Range
@@ -110,8 +102,6 @@ public static class GettingInRangeConstants
 {
     final public static double KpDistance = -0.1; // Proportional control constant for distance
 }
-
-//Seeking: None (that I can tell)
 
 //Charge Station
 public static class ChargeStationConstants
@@ -124,7 +114,7 @@ public static class ChargeStationConstants
 public static class ShoulderDriveConstants
 {
   public static double nodeSpacingFromAprilTag = 22.00; //inches
-  public static double desiredDistanceCS = 14.5; //inches
+  public static double desiredDistanceSD = 14.5; //inches --> SD = Shoulder Drive
   public static double limelightOffsetFromRobotCenter = 6.5; //inches
 }
 

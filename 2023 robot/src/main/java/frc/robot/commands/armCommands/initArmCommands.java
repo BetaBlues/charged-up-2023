@@ -15,7 +15,7 @@ public class initArmCommands extends CommandBase{
 
     public Command startPos;
 
-    public initArmCommands( extenderSubsystem extenderSub,shoulderSubsystem shoulderSub){
+    public initArmCommands(extenderSubsystem extenderSub,shoulderSubsystem shoulderSub){
         this.extenderSub = extenderSub;
         this.shoulderSub = shoulderSub;
         extenderStartPos = new extenderStartPos(extenderSub);

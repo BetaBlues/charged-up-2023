@@ -46,10 +46,10 @@ public class GripperConeCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         
-        if(gripperSubsystem.isOpen && gripperSubsystem.getPosition() <= Constants.gripperConstants.coneClose){
+        if(gripperSubsystem.isOpen && gripperSubsystem.getPosition() >= Constants.gripperConstants.coneClose){
             return true;
         }
-        else if(!gripperSubsystem.isOpen && gripperSubsystem.getPosition() >= Constants.gripperConstants.open){
+        else if(!gripperSubsystem.isOpen && gripperSubsystem.getPosition() <= Constants.gripperConstants.open){
             return true;
         }
         return false;

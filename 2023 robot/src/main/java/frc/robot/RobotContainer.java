@@ -39,8 +39,8 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    new GripperStartCommand(gripper);
-
+    //new GripperStartCommand(gripper);
+    
     chassis.setDefaultCommand(new RunCommand(() -> chassis.driveCartesian(
         driver.getRawAxis(xboxConstants.rightXAxis) * Constants.chassisConstants.normalDriveSpeed,
         driver.getRawAxis(xboxConstants.leftXAxis) * Constants.chassisConstants.normalSidewaysDriveSpeed,
@@ -49,8 +49,13 @@ public class RobotContainer {
         ),
         chassis)); 
 
-    shoulderSubsystem.setDefaultCommand(new shoulderUpCommand(shoulderSubsystem, manipulator));
-    extenderSubsystem.setDefaultCommand(new extenderCommand(extenderSubsystem, manipulator));
+    shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.1), shoulderSubsystem));
+    extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * 0.1), extenderSubsystem));
+
+    //sgripper.setDefaultCommand(new RunCommand(() -> gripper.go(driver.getRawAxis(xboxConstants.leftYAxis)* Constants.gripperConstants.gripperSpeed), gripper));
+
+    //shoulderSubsystem.setDefaultCommand(new shoulderUpCommand(shoulderSubsystem, manipulator));
+    //extenderSubsystem.setDefaultCommand(new extenderCommand(extenderSubsystem, manipulator));
 
     //chassis.setDefaultCommand(new RunCommand(() -> chassis.driveCartesian(0, .5, 0), chassis));
     configureButtonBindings();
@@ -59,14 +64,27 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     
-    // new JoystickButton(driver, XboxController.Button.kLeftBumper.value)
-    //   .onTrue(new GripperConeCommand(gripper));
+    /*
+     *  new JoystickButton(driver, XboxController.Button.kLeftBumper.value)
+       .onTrue(new GripperConeCommand(gripper));
     
-    // new JoystickButton(driver, XboxController.Button.kRightBumper.value)
-    //   .onTrue(new GripperCubeCommand(gripper));
+     new JoystickButton(driver, XboxController.Button.kRightBumper.value)
+       .onTrue(new GripperCubeCommand(gripper));
+     */
 
-    new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(extenderSubsystem, shoulderSubsystem));
-    new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(extenderSubsystem, shoulderSubsystem));
+    /*
+     * new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
+      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperOpenSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
+    new JoystickButton(manipulator, XboxController.Button.kRightBumper.value)
+     .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperCloseSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
+
+    
+     */
+    
+    
+
+    //new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(extenderSubsystem, shoulderSubsystem));
+    //new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(extenderSubsystem, shoulderSubsystem));
   }
 
   public Command getAutonomousCommand() {

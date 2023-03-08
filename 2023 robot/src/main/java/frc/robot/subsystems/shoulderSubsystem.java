@@ -131,8 +131,8 @@ public class shoulderSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Shoulder LimSwitch", shoulderSwitchState());
-    SmartDashboard.putNumber("Shoulder Position", shoulderEncoder.getPosition());
+    //SmartDashboard.putBoolean("Shoulder LimSwitch", shoulderSwitchState());
+    //SmartDashboard.putNumber("Shoulder Position", shoulderEncoder.getPosition());
   }
 
   @Override

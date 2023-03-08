@@ -39,7 +39,6 @@ public final class Constants {
   }
 
   public static class gripperConstants {
-    public static final int gripperNeoID = 9;
 
     public static final int gripperID = 9;
     public static final double gripperP = 0.0;
@@ -47,17 +46,21 @@ public final class Constants {
     public static final double gripperI = 0.0;
 
     public static final int start = 360;
-    public static final int open = 180;
-    public static final int coneClose = 45;
-    public static final int cubeClose = 90;
+    public static final int open = 0;
+    public static final int coneClose = 65;
+    public static final int cubeClose = 75;
 
-    public static final double gripperSpeed = 0.05;
+    public static final double gripperSpeed = -0.2;
+
+    public static final double gripperCloseSpeed = 0.05;
+    public static final double gripperOpenSpeed = -0.1;
+    
     
 
 }
 
 public static final class ShoulderConstants {
-  public static final int shoulderSparkMaxID = 9;
+  public static final int shoulderSparkMaxID = 8;
   public static final double shoulderArmP = 0.0;
   public static final double shoulderArmD = 0.0;
   public static final double shoulderArmI = 0.0;
@@ -66,7 +69,7 @@ public static final class ShoulderConstants {
 }
 
 public static final class ExtenderConstants {
-  public static final int extenderSparkMaxID = 3;
+  public static final int extenderSparkMaxID = 7;
   public static final double extenderArmP = 0.0;
   public static final double extenderArmD = 0.0;
   public static final double extenderArmI = 0.0;

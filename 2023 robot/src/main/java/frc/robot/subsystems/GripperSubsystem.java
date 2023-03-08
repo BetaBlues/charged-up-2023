@@ -25,23 +25,24 @@ public class GripperSubsystem extends SubsystemBase {
     private SparkMaxPIDController motorController;
     private SparkMaxLimitSwitch limitSwitch;
     private RelativeEncoder encoder; 
+
  
     public boolean isOpen;
     
     public GripperSubsystem() {
 
-        motor = new CANSparkMax(gripperConstants.gripperNeoID, MotorType.kBrushless);
+        motor = new CANSparkMax(gripperConstants.gripperID, MotorType.kBrushless);
         isOpen = true;
         
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
 
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.gripperConstants.open);
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
+        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 1533);
+        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -);
         
 
         motorController = motor.getPIDController(); 
-        limitSwitch = motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+        //limitSwitch = motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
         encoder = motor.getEncoder();
         encoder.setPositionConversionFactor(360);
@@ -64,14 +65,28 @@ public class GripperSubsystem extends SubsystemBase {
     public boolean gripperSwitchState(){
         return limitSwitch.isPressed();
     }
-
     public void setPosition(int position){
         encoder.setPosition(position);
     }
-
     public double getPosition(){
         return encoder.getPosition();
     }
+
+
+    public void move(double speed){
+        motor.set(speed);
+    }
+    public void stop(){
+        motor.stopMotor();  
+    }
+
+
+
+
+    
+
+
+
 
     public void open(){
         motor.set(Constants.gripperConstants.gripperSpeed);
@@ -86,13 +101,7 @@ public class GripperSubsystem extends SubsystemBase {
         motor.set(-Constants.gripperConstants.gripperSpeed);
     }
 
-    public void move(double speed){
-        motor.set(speed);
-    }
-
-    public void stop(){
-        motor.stopMotor();  
-    }
+    
 /*
  * @Override
     public void periodic() {

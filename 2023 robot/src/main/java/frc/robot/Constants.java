@@ -71,7 +71,7 @@ public static final class ExtenderConstants {
   public static final double extenderArmP = 0.0;
   public static final double extenderArmD = 0.0;
   public static final double extenderArmI = 0.0;
-  public static final double extenderFactor = 100.0;
+  //public static final double extenderFactor = 100.0;
 }
 
 public static class LevelConstants {

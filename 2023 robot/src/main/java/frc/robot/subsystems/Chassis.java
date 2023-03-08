@@ -160,7 +160,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpLeft()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -176,7 +175,7 @@ public class Chassis extends SubsystemBase {
       
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards
@@ -189,7 +188,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpCenter()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -202,7 +200,7 @@ public class Chassis extends SubsystemBase {
 
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards
@@ -215,7 +213,6 @@ public class Chassis extends SubsystemBase {
   public void ShoulderLineUpRight()
   {
     double distanceError = 0;
-    double desiredDistance = 0;
     double drivingAdjust = 0;
 
     if(AprilTagID == 1 || AprilTagID == 2 || AprilTagID == 3 || AprilTagID == 6 || AprilTagID == 7 || AprilTagID == 8)
@@ -231,7 +228,7 @@ public class Chassis extends SubsystemBase {
       
       double currentDistance = Estimate_Distance();
 
-      distanceError = desiredDistance - currentDistance;
+      distanceError = desiredDistanceSD - currentDistance;
       drivingAdjust = Constants.GettingInRangeConstants.KpDistance * distanceError;
           
       //move backwards

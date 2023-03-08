@@ -5,9 +5,11 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxLimitSwitch;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ExtenderConstants;
@@ -17,6 +19,8 @@ public class extenderSubsystem extends SubsystemBase {
   /** making variables */
     public CANSparkMax extenderCIM;
     private SparkMaxPIDController extenderController;
+    private SparkMaxLimitSwitch extenderSwitch;
+    private RelativeEncoder extenderEncoder;
 
     /**
      * constructor
@@ -24,8 +28,12 @@ public class extenderSubsystem extends SubsystemBase {
     public extenderSubsystem() {
         /* giving substance to names */
         extenderCIM = new CANSparkMax(ExtenderConstants.extenderSparkMaxID, MotorType.kBrushless);
-        
+
         extenderController = extenderCIM.getPIDController(); 
+        extenderSwitch = extenderCIM.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+
+        extenderEncoder = extenderCIM.getEncoder();
+        extenderEncoder.setPositionConversionFactor(100.0);
 
         extenderController.setP(ExtenderConstants.extenderArmP);
         extenderController.setI(ExtenderConstants.extenderArmI);
@@ -85,10 +93,10 @@ public class extenderSubsystem extends SubsystemBase {
   //   //extenderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
   //   //extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
   //   if(currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderNEO.set(0.3);
+  //     extenderCIM.set(0.3);
   //   }
   //   else if (currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderNEO.set(0.3);
+  //     extenderCIM.set(0.3);
   //   }
   //   else {
   //     SmartDashboard.putBoolean("Level Two Arm position extender", true);

@@ -53,8 +53,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     
-    /*
-     * SmartDashboard.putNumber("Voltage", m_pdh.getVoltage());
+    
+    SmartDashboard.putNumber("Voltage", m_pdh.getVoltage());
     //SmartDashboard.putNumber("Gyro Direction", m_robotContainer.gyro.getAngle());
     SmartDashboard.putNumber("Front Right Voltage", m_robotContainer.chassis.rightFrontMotor.getMotorOutputVoltage());
     SmartDashboard.putNumber("Front Left Voltage", m_robotContainer.chassis.leftFrontMotor.getMotorOutputVoltage());
@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Gripper Current", m_robotContainer.gripper.motor.getOutputCurrent());
 
 
-     */
+     
     
 
     

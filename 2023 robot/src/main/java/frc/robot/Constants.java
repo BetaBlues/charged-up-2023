@@ -23,8 +23,8 @@ public final class Constants {
   
   public final class chassisConstants {
     //Chassis Motor ports
-    public final static int leftFrontMotorID = 2; //2
-    public final static int rightFrontMotorID = 5; //5
+    public final static int leftFrontMotorID = 5; //2
+    public final static int rightFrontMotorID = 2; //5
     public final static int rightRearMotorID = 1;
     public final static int leftRearMotorID = 0;//0
 
@@ -52,7 +52,7 @@ public final class Constants {
 
     public static final double gripperSpeed = -0.2;
 
-    public static final double gripperCloseSpeed = 0.05;
+    public static final double gripperCloseSpeed = 0.1;
     public static final double gripperOpenSpeed = -0.1;
     
     

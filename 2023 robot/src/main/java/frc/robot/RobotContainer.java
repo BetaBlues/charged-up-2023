@@ -49,8 +49,8 @@ public class RobotContainer {
         ),
         chassis)); 
 
-    shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.1), shoulderSubsystem));
-    extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * 0.1), extenderSubsystem));
+    shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.2), shoulderSubsystem));
+    extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * 0.2), extenderSubsystem));
 
     //sgripper.setDefaultCommand(new RunCommand(() -> gripper.go(driver.getRawAxis(xboxConstants.leftYAxis)* Constants.gripperConstants.gripperSpeed), gripper));
 
@@ -72,20 +72,18 @@ public class RobotContainer {
        .onTrue(new GripperCubeCommand(gripper));
      */
 
-    /*
-     * new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
+    
+    new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
       .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperOpenSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
     new JoystickButton(manipulator, XboxController.Button.kRightBumper.value)
      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperCloseSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
 
     
-     */
-    
     // new JoystickButton(driver, XboxController.Button.kRightBumper.value)
     //   .onTrue(new GripperCubeCommand(gripper));
 
-    //new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(extenderSubsystem, shoulderSubsystem));
-    //new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(extenderSubsystem, shoulderSubsystem));
+    new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(shoulderSubsystem));
+    new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(shoulderSubsystem));
   }
 
   public Command getAutonomousCommand() {

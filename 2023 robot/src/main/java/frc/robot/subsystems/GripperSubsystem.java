@@ -34,11 +34,11 @@ public class GripperSubsystem extends SubsystemBase {
         motor = new CANSparkMax(gripperConstants.gripperID, MotorType.kBrushless);
         isOpen = true;
         
-        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+        motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
 
-        motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 1533);
-        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -);
+        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 1533);
+        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -85);
         
 
         motorController = motor.getPIDController(); 

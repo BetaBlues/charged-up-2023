@@ -69,7 +69,7 @@ public static final class ShoulderConstants {
 }
 
 public static final class ExtenderConstants {
-  public static final int extenderSparkMaxID = 7;
+  public static final int extenderSparkMaxID = 45;
   public static final double extenderArmP = 0.0;
   public static final double extenderArmD = 0.0;
   public static final double extenderArmI = 0.0;

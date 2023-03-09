@@ -22,7 +22,7 @@ public class extenderSubsystem extends SubsystemBase {
      */
     public extenderSubsystem() {
         /* giving substance to names */
-        extenderCIM = new CANSparkMax(ExtenderConstants.extenderSparkMaxID, MotorType.kBrushless);
+        extenderCIM = new CANSparkMax(ExtenderConstants.extenderSparkMaxID, MotorType.kBrushed);
 
         extenderController = extenderCIM.getPIDController(); 
 

@@ -92,8 +92,8 @@ public static class LevelConstants {
 //Estimate Distance
 public static class EstimateDistanceConstants
 {
-    final public static double limelightMountAngleDegrees = 15.0; // how many degrees back is your limelight rotated from perfectly vertical?
-    final public static double limelightLensHeightInches = 8.125; // distance from the center of the Limelight lens to the floor
+    final public static double limelightMountAngleDegrees = -45.0; // how many degrees back is your limelight rotated from perfectly vertical?
+    final public static double limelightLensHeightInches = 27.5; // distance from the center of the Limelight lens to the floor
     final public static double goalHeightInches = 15.125; // bottom of AprilTag height (same for shoulder and drive use)
 }
 
@@ -107,15 +107,15 @@ public static class GettingInRangeConstants
 public static class ChargeStationConstants
 {
     public static double AprilTagSpacing = 66.00; //in inches
-    public static double desiredDistanceCS = 111.00; //in inches --> only for charge station
-    public static double limelightOffsetFromRobotCenter = 6.5; //in inches
+    public static double desiredDistanceCS = 132.25; //in inches --> only for charge station --> 111 + 21.25
+    public static double limelightOffsetFromRobotCenter = 4.625; //in inches
 }
 
 public static class ShoulderDriveConstants
 {
   public static double nodeSpacingFromAprilTag = 22.00; //inches
-  public static double desiredDistanceSD = 14.5; //inches --> SD = Shoulder Drive
-  public static double limelightOffsetFromRobotCenter = 6.5; //inches
+  public static double desiredDistanceSD = 35.75; //inches --> SD = Shoulder Drive --> 14.5 + 21.25
+  public static double limelightOffsetFromRobotCenter = 4.625; //inches
 }
 
 public static class ButtonConstants {

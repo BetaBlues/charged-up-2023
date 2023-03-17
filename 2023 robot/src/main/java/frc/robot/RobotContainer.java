@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.time.Year;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,9 +44,9 @@ public class RobotContainer {
     //new GripperStartCommand(gripper);
     
     chassis.setDefaultCommand(new RunCommand(() -> chassis.driveCartesian(
-        driver.getRawAxis(xboxConstants.rightXAxis) * Constants.chassisConstants.normalDriveSpeed,
+        driver.getRawAxis(xboxConstants.rightXAxis) * Constants.chassisConstants.normalRotationSpeed,
         driver.getRawAxis(xboxConstants.leftXAxis) * Constants.chassisConstants.normalSidewaysDriveSpeed,
-        driver.getRawAxis(xboxConstants.leftYAxis) * Constants.chassisConstants.normalRotationSpeed * -1 // the remote says that forwards is -1 and backwards is 1
+        driver.getRawAxis(xboxConstants.leftYAxis) * Constants.chassisConstants.normalDriveSpeed * -1 // the remote says that forwards is -1 and backwards is 1
         //gyro.getRotation2d()
         ),
         chassis)); 
@@ -72,10 +74,9 @@ public class RobotContainer {
        .onTrue(new GripperCubeCommand(gripper));
      */
 
-    
-    new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
-      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperOpenSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
     new JoystickButton(manipulator, XboxController.Button.kRightBumper.value)
+      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperOpenSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
+    new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperCloseSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
 
     
@@ -86,18 +87,61 @@ public class RobotContainer {
     //new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(shoulderSubsystem));
   }
 
+  public double distanceSecondsY(double distance){
+    double conversionY = 1.34/36; // seconds over inches 
+    return conversionY * distance;
+  }
+  public double distanceSecondsX(double distance){
+    double conversionX = 0; // seconds over inches 
+    return conversionX * distance;
+  }
+
+  public Command auto(double position, String color){
+    double forwards = Constants.chassisConstants.normalDriveSpeed;
+    double backwards = -Constants.chassisConstants.normalDriveSpeed;
+    double right = Constants.chassisConstants.normalSidewaysDriveSpeed;
+    double left = -Constants.chassisConstants.normalSidewaysDriveSpeed;
+
+    if (position == 1){
+      return new RunCommand(() -> chassis.driveY(forwards), chassis).withTimeout(distanceSecondsY(90))
+        .andThen(() -> chassis.driveY(backwards), chassis).withTimeout(distanceSecondsY(90));
+    }
+    else if(position == 2){
+      if (color.equals("red")){
+        return new RunCommand(() -> chassis.driveX(left), chassis).withTimeout(distanceSecondsX(66))
+                .andThen(() -> chassis.driveY(forwards), chassis).withTimeout(distanceSecondsY(60))
+                .andThen(() -> chassis.driveY(backwards), chassis).withTimeout(distanceSecondsY(60));    
+      }
+      else {
+        return new RunCommand(() -> chassis.driveX(right), chassis).withTimeout(distanceSecondsX(66))
+                .andThen(() -> chassis.driveY(forwards), chassis).withTimeout(distanceSecondsY(60))
+                .andThen(() -> chassis.driveY(backwards), chassis).withTimeout(distanceSecondsY(60));    
+      }
+    }
+    else{
+      return new RunCommand(()-> chassis.driveY(forwards), chassis).withTimeout(distanceSecondsY(144))
+        .andThen(() -> chassis.driveY(backwards), chassis).withTimeout(distanceSecondsY(144));
+    }
+  }
+
   public Command getAutonomousCommand() {
-    //return m_autoCommand;
 
-    return new RunCommand(() -> chassis.getOnChargeStation(), chassis);
+    //return new RunCommand(() -> chassis.getOnChargeStation(), chassis);
 
-    /*
-    return new RunCommand(() -> chassis.driveCartesian(0, .3, 0), chassis).withTimeout(2)
-        .andThen(new RunCommand(() -> chassis.driveCartesian(0, 0, 0.3), chassis).withTimeout(2))
-        .andThen(new RunCommand(() -> chassis.driveCartesian(0,0,0), chassis)
-        );
-    */
+    //return auto(2, "blue").andThen(new RunCommand(()-> chassis.driveCartesian(0, 0,0), chassis));
+
+    //return new RunCommand(() -> chassis.driveY(0.3), chassis).withTimeout(2)
+    //  .andThen(new RunCommand(() ->chassis.driveY(0)));
+
+    Command flipAndBack = new RunCommand(() -> shoulderSubsystem.move(-0.4), shoulderSubsystem).withTimeout(.4)
+    .andThen(new RunCommand(() -> shoulderSubsystem.stopShoulder()).withTimeout(0.5))
+    .andThen(new RunCommand(() -> chassis.driveCartesian(0, 0, -0.5), chassis).withTimeout(12));
+    //add withTimeout() at the end, using zero runs it at the same time, using 14.6 causes build to fail
+
+    return flipAndBack; 
+     //return bckup;
+
+    //return new RunCommand(()-> chassis.driveY(0), chassis);
 
   } 
-
 }

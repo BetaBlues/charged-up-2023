@@ -22,6 +22,7 @@ public class Chassis extends SubsystemBase {
   public WPI_VictorSPX rightFrontMotor;
   public WPI_VictorSPX rightRearMotor;
   private MecanumDrive driveTrain;
+
   public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   public long AprilTagID;
 
@@ -50,6 +51,14 @@ public class Chassis extends SubsystemBase {
     return null;
   }
 
+  public void driveY(double speed){
+    driveCartesian(0, speed, 0 );
+  }
+  public void driveX(double speed){
+    driveCartesian(0, speed, 0 );
+  }
+
+
 /*
  * -------------------------------------------------------------
  * -------------------------------------------------------------
@@ -57,7 +66,8 @@ public class Chassis extends SubsystemBase {
  * -------------------------------------------------------------
  * -------------------------------------------------------------
  */
-
+  /*
+  
   public void isTargetFound() 
   { 
       double tv = table.getEntry("tv").getDouble(0);
@@ -263,5 +273,5 @@ public class Chassis extends SubsystemBase {
         new RunCommand(() -> driveCartesian(0, Constants.chassisConstants.normalDriveSpeed, 0), this).withTimeout(time); //(zRotation, ySpeed, xSpeed)
       }
   }
-
+ */
 }

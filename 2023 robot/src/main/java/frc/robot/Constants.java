@@ -29,47 +29,51 @@ public final class Constants {
     public final static int leftRearMotorID = 0;//0
 
     //chassis speeds
-    public final static double normalDriveSpeed = 0.25;
-    public final static double normalSidewaysDriveSpeed = 0.35;
-    public final static double normalRotationSpeed = 0.3;
+    public final static double normalDriveSpeed = 0.6;
+    public final static double normalSidewaysDriveSpeed = 0.77;
+    public final static double normalRotationSpeed = 0.5;
 
     public final static double gyro = 0;
 
     public final static double inPerSecSpeed = 1;
-  }
+  }                                                    
 
   public static class gripperConstants {
 
     public static final int gripperID = 9;
     public static final double gripperP = 0.0;
     public static final double gripperD = 0.0;
+
+    
     public static final double gripperI = 0.0;
 
     public static final int start = 360;
     public static final int open = 0;
-    public static final int coneClose = 65;
+    public static final int coneClose = 80;
     public static final int cubeClose = 75;
 
     public static final double gripperSpeed = -0.2;
 
-    public static final double gripperCloseSpeed = 0.1;
-    public static final double gripperOpenSpeed = -0.1;
+    public static final double gripperCloseSpeed = 0.30
+    ;
+    public static final double gripperOpenSpeed = -0.15;
     
     
 
 }
 
 public static final class ShoulderConstants {
-  public static final int shoulderSparkMaxID = 8;
+  public static final int shoulderSparkMaxID = 8;////////'''''''''''''''''''''''''''''''''''''']]
   public static final double shoulderArmP = 0.0;
   public static final double shoulderArmD = 0.0;
   public static final double shoulderArmI = 0.0;
   public static final double stopSpeed = 0.0;
   public static final double shoulderFactor = 185.7142857;
+  public static final int limitSwitchChannel = 9; 
 }
 
 public static final class ExtenderConstants {
-  public static final int extenderSparkMaxID = 7;
+  public static final int extenderSparkMaxID = 45;
   public static final double extenderArmP = 0.0;
   public static final double extenderArmD = 0.0;
   public static final double extenderArmI = 0.0;
@@ -80,6 +84,7 @@ public static class LevelConstants {
   //angle constants
   public static final double cone_levelOneRef_shoulder = 0.0;
   public static final double cone_levelOneTarget_shoulder = 49.2678933;
+
   public static final double cone_levelOneRef_extender = 0.0;
   public static final double cone_levelOneTarget_extender = 0.0;
 
@@ -92,7 +97,7 @@ public static class LevelConstants {
 //Estimate Distance
 public static class EstimateDistanceConstants
 {
-    final public static double limelightMountAngleDegrees = 15.0; // how many degrees back is your limelight rotated from perfectly vertical?
+    final public static double limelightMountAngleDegrees = 30.0; // how many degrees back is your limelight rotated from perfectly vertical?
     final public static double limelightLensHeightInches = 8.125; // distance from the center of the Limelight lens to the floor
     final public static double goalHeightInches = 15.125; // bottom of AprilTag height (same for shoulder and drive use)
 }
@@ -133,6 +138,7 @@ public static class ButtonConstants {
         public static final int buttonLeftLowerBumper = 7;
         public static final int buttonRightLowerBumper = 8;
         public static final int buttonBack = 9;
+
         public static final int buttonStart = 10;
         public static final int leftXAxis = 0;
         public static final int leftYAxis = 1;
@@ -142,3 +148,20 @@ public static class ButtonConstants {
     }
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

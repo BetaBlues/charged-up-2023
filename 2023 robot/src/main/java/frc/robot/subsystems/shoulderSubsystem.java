@@ -11,6 +11,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,7 +24,7 @@ public class shoulderSubsystem extends SubsystemBase {
     private SparkMaxPIDController shoulderController;
     private SparkMaxLimitSwitch shoulderSwitch;
     private RelativeEncoder shoulderEncoder; 
-
+    DigitalInput topLimitSwitch = new DigitalInput(9);
     /**
      * constructor
      */
@@ -92,7 +93,22 @@ public class shoulderSubsystem extends SubsystemBase {
   }
 
   public void move(double speed) {
-    shoulderNEO.set(speed);
+
+    if(speed < 0){
+      if(topLimitSwitch.get()){
+        //going up and limit is tripped so stop
+
+        shoulderNEO.set(0);
+
+      } else{
+        //going up but not tripped 
+        shoulderNEO.set(speed);
+      }
+    }else{
+      //not going up 
+      shoulderNEO.set(speed);
+    }
+    
   }
 
 //levels

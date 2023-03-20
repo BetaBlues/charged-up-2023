@@ -94,6 +94,7 @@ public static class LevelConstants {
   public static final double cone_levelTwoTarget_extender = 0.0;
 }
 
+/*
 //Estimate Distance
 public static class EstimateDistanceConstants
 {
@@ -122,6 +123,7 @@ public static class ShoulderDriveConstants
   public static double desiredDistanceSD = 35.75; //inches --> SD = Shoulder Drive --> 14.5 + 21.25
   public static double limelightOffsetFromRobotCenter = 4.625; //inches
 }
+*/
 
 public static class ButtonConstants {
   public static final int levelOneButton = XboxController.Button.kA.value;

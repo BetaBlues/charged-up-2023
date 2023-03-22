@@ -4,23 +4,12 @@
 
 package frc.robot;
 
-import java.time.Year;
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.ButtonConstants;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.xboxConstants;
-import frc.robot.commands.armCommands.LevelOneCommand;
-import frc.robot.commands.armCommands.LevelTwoCommand;
-import frc.robot.commands.armCommands.extenderCommand;
-import frc.robot.commands.armCommands.shoulderUpCommand;
-import frc.robot.commands.gripperCommands.GripperConeCommand;
-import frc.robot.commands.gripperCommands.GripperCubeCommand;
-import frc.robot.commands.gripperCommands.GripperStartCommand;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.GripperSubsystem;
 import frc.robot.subsystems.shoulderSubsystem;
@@ -40,8 +29,6 @@ public class RobotContainer {
   //public final static ADXRS450_Gyro gyro = new ADXRS450_Gyro(); // Creates an ADXRS450_Gyro object on the onboard SPI port
 
   public RobotContainer() {
-
-    //new GripperStartCommand(gripper);
     
     chassis.setDefaultCommand(new RunCommand(() -> chassis.driveCartesian(
         driver.getRawAxis(xboxConstants.rightXAxis) * Constants.chassisConstants.normalRotationSpeed,
@@ -51,40 +38,26 @@ public class RobotContainer {
         ),
         chassis)); 
 
-    shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.2), shoulderSubsystem));
+    shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.15), shoulderSubsystem));
     extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * 0.2), extenderSubsystem));
 
-    //sgripper.setDefaultCommand(new RunCommand(() -> gripper.go(driver.getRawAxis(xboxConstants.leftYAxis)* Constants.gripperConstants.gripperSpeed), gripper));
+    //new RunCommand(() -> )
 
     //shoulderSubsystem.setDefaultCommand(new shoulderUpCommand(shoulderSubsystem, manipulator));
     //extenderSubsystem.setDefaultCommand(new extenderCommand(extenderSubsystem, manipulator));
 
-    //chassis.setDefaultCommand(new RunCommand(() -> chassis.driveCartesian(0, .5, 0), chassis));
     configureButtonBindings();
 
   }
 
   private void configureButtonBindings() {
-    
-    /*
-     *  new JoystickButton(driver, XboxController.Button.kLeftBumper.value)
-       .onTrue(new GripperConeCommand(gripper));
-    
-     new JoystickButton(driver, XboxController.Button.kRightBumper.value)
-       .onTrue(new GripperCubeCommand(gripper));
-     */
 
     new JoystickButton(manipulator, XboxController.Button.kRightBumper.value)
       .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperOpenSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
     new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value)
      .onTrue(new RunCommand(() -> gripper.move(Constants.gripperConstants.gripperCloseSpeed), gripper)).onFalse(new RunCommand(() -> gripper.stop(), gripper));
-
     
-    // new JoystickButton(driver, XboxController.Button.kRightBumper.value)
-    //   .onTrue(new GripperCubeCommand(gripper));
 
-   // new JoystickButton(manipulator, ButtonConstants.levelOneButton).onTrue(new LevelOneCommand(shoulderSubsystem));
-    //new JoystickButton(manipulator, ButtonConstants.levelTwoButton).onTrue(new LevelTwoCommand(shoulderSubsystem));
   }
 
   public double distanceSecondsY(double distance){
@@ -126,22 +99,14 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
 
-    //return new RunCommand(() -> chassis.getOnChargeStation(), chassis);
-
-    //return auto(2, "blue").andThen(new RunCommand(()-> chassis.driveCartesian(0, 0,0), chassis));
-
-    //return new RunCommand(() -> chassis.driveY(0.3), chassis).withTimeout(2)
-    //  .andThen(new RunCommand(() ->chassis.driveY(0)));
-
+     
     Command flipAndBack = new RunCommand(() -> shoulderSubsystem.move(-0.4), shoulderSubsystem).withTimeout(.4)
     .andThen(new RunCommand(() -> shoulderSubsystem.stopShoulder()).withTimeout(0.5))
-    .andThen(new RunCommand(() -> chassis.driveCartesian(0, 0, -0.5), chassis).withTimeout(12));
+    .andThen(new RunCommand(() -> chassis.driveCartesian(0, 0, -0.4), chassis).withTimeout(10.5));
     //add withTimeout() at the end, using zero runs it at the same time, using 14.6 causes build to fail
 
-    return flipAndBack; 
-     //return bckup;
-
-    //return new RunCommand(()-> chassis.driveY(0), chassis);
+    //Command flipAndBack = new RunCommand(() -> chassis.driveCartesian(0, 0, -0.4), chassis).withTimeout(4);
+    return flipAndBack;
 
   } 
 }

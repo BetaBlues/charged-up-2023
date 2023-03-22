@@ -29,9 +29,9 @@ public final class Constants {
     public final static int leftRearMotorID = 0;//0
 
     //chassis speeds
-    public final static double normalDriveSpeed = 0.6;
-    public final static double normalSidewaysDriveSpeed = 0.77;
-    public final static double normalRotationSpeed = 0.5;
+    public final static double normalDriveSpeed = 0.4; // for comp: 0.6 
+    public final static double normalSidewaysDriveSpeed = 0.6; // for comp: 0.77
+    public final static double normalRotationSpeed = 0.35; // for comp: 0.5
 
     public final static double gyro = 0;
 
@@ -54,9 +54,9 @@ public final class Constants {
 
     public static final double gripperSpeed = -0.2;
 
-    public static final double gripperCloseSpeed = 0.30
+    public static final double gripperCloseSpeed = 0.10
     ;
-    public static final double gripperOpenSpeed = -0.15;
+    public static final double gripperOpenSpeed = -0.1;
     
     
 

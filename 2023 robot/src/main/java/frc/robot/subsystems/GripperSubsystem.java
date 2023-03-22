@@ -2,9 +2,6 @@
 package frc.robot.subsystems;
 
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
@@ -79,11 +76,6 @@ public class GripperSubsystem extends SubsystemBase {
     public void stop(){
         motor.stopMotor();  
     }
-
-
-
-
-    
 
 
 

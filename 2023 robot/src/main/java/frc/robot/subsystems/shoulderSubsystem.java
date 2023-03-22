@@ -18,6 +18,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LevelConstants;
 import frc.robot.Constants.ShoulderConstants;
 
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController; 
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+
+
 public class shoulderSubsystem extends SubsystemBase {
   /** making variables */
     public CANSparkMax shoulderNEO;
@@ -38,9 +44,17 @@ public class shoulderSubsystem extends SubsystemBase {
         shoulderEncoder = shoulderNEO.getEncoder();
         shoulderEncoder.setPositionConversionFactor(100.0);
 
-        shoulderController.setP(ShoulderConstants.shoulderArmP);
-        shoulderController.setI(ShoulderConstants.shoulderArmI);
-        shoulderController.setD(ShoulderConstants.shoulderArmD);
+        
+        //shoulderController.setP(ShoulderConstants.shoulderArmP);
+        //shoulderController.setI(ShoulderConstants.shoulderArmI);
+        //shoulderController.setD(ShoulderConstants.shoulderArmD);
+
+        PIDController shoulderPid = new PIDController(0.0, 0.0, 0.0);
+
+        
+
+
+
 
     shoulderNEO.setIdleMode(IdleMode.kBrake);
 
@@ -93,6 +107,8 @@ public class shoulderSubsystem extends SubsystemBase {
   }
 
   public void move(double speed) {
+
+  
 
     if(speed < 0){
       if(topLimitSwitch.get()){

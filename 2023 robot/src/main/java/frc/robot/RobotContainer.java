@@ -39,10 +39,9 @@ public class RobotContainer {
         chassis)); 
 
     shoulderSubsystem.setDefaultCommand(new RunCommand(() -> shoulderSubsystem.move(manipulator.getRawAxis(xboxConstants.rightYAxis) * 0.15), shoulderSubsystem));
-    extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * 0.2), extenderSubsystem));
+    extenderSubsystem.setDefaultCommand(new RunCommand(() -> extenderSubsystem.move(manipulator.getRawAxis(xboxConstants.leftYAxis) * -0.2), extenderSubsystem));
 
-    //new RunCommand(() -> )
-
+    //GripperSubsystem.setDefaultCommand(new RunCommand(() -> GripperSubsystem.move(manipulator.getRawButton())))
     //shoulderSubsystem.setDefaultCommand(new shoulderUpCommand(shoulderSubsystem, manipulator));
     //extenderSubsystem.setDefaultCommand(new extenderCommand(extenderSubsystem, manipulator));
 

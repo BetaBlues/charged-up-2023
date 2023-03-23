@@ -54,16 +54,15 @@ public final class Constants {
 
     public static final double gripperSpeed = -0.2;
 
-    public static final double gripperCloseSpeed = 0.10
-    ;
-    public static final double gripperOpenSpeed = -0.1;
+    public static final double gripperCloseSpeed = 0.1;
+    public static final double gripperOpenSpeed = -0.13;
     
     
 
 }
 
 public static final class ShoulderConstants {
-  public static final int shoulderSparkMaxID = 8;////////'''''''''''''''''''''''''''''''''''''']]
+  public static final int shoulderSparkMaxID = 8;
   public static final double shoulderArmP = 0.0;
   public static final double shoulderArmD = 0.0;
   public static final double shoulderArmI = 0.0;

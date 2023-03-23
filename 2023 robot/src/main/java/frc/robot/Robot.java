@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("FL port", m_pdh.getCurrent(18));
     SmartDashboard.putNumber("BR port", m_pdh.getCurrent(3));
     SmartDashboard.putNumber("BL port", m_pdh.getCurrent(1));
-    SmartDashboard.putNumber("test port", m_pdh.getCurrent(12));
+    //SmartDashboard.putNumber("test port", m_pdh.getCurrent(12));
     
     //SmartDashboard.putBoolean("Gripper LimSwitch", gripperSwitchState());
     SmartDashboard.putNumber("Gripper Position", m_robotContainer.gripper.getPosition());

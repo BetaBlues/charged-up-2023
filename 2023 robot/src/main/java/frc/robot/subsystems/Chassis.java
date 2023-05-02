@@ -40,6 +40,8 @@ public class Chassis extends SubsystemBase {
     rightRearMotor.setInverted(true);
   
     driveTrain = new MecanumDrive(leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor);
+    navXGyro = new NavXGyro(); 
+  
   }
 
   public void driveCartesian(double zRotation, double ySpeed, double xSpeed) { //, Rotation2d gyroAngle
@@ -68,7 +70,7 @@ public Rotation2d getRotation(){
 
 
 
-  navXGyro = new NavXgyro(); 
+ 
 
 /*
  * -------------------------------------------------------------

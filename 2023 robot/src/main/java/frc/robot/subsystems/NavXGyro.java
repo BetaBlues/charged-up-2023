@@ -31,12 +31,12 @@ public class NavXGyro implements Gyro{
     }
 
     public double getAngle(){
-       return 
+       
 
     }
 
     public double getRate(){
-        
+         
     }
 
     public Rotation2d getRotation2d(){

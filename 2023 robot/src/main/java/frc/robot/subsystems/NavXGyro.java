@@ -30,8 +30,9 @@ public class NavXGyro implements Gyro{
         
     }
 
-    public double getAngle(){
-       
+    @Override
+    public Rotation2d getAngle(){
+       return navX.getRotation2d();
 
     }
 
@@ -44,7 +45,7 @@ public class NavXGyro implements Gyro{
     }
 
     public void reset(){
-
+        navX.reset(); 
     }
 
     public void close(){

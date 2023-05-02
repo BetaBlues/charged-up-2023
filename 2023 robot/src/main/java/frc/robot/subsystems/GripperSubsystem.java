@@ -34,22 +34,14 @@ public class GripperSubsystem extends SubsystemBase {
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
         motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
 
-        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 1533);
-        //motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -85);
-        
 
         motorController = motor.getPIDController(); 
-        //limitSwitch = motor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+   
 
         encoder = motor.getEncoder();
         encoder.setPositionConversionFactor(360);
         
-        /*
-        motorController.setP(gripperConstants.gripperP);
-        motorController.setI(gripperConstants.gripperP);
-        motorController.setD(gripperConstants.gripperP);
-         */
-        
+
         motor.setIdleMode(IdleMode.kBrake);
         
         encoder.setPosition(Constants.gripperConstants.open);

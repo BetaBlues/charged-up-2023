@@ -35,27 +35,7 @@ public class extenderSubsystem extends SubsystemBase {
     extenderCIM.burnFlash();
   }
 
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  // public CommandBase exampleMethodCommand() {
-  //   // Inline construction of command goes here.
-  //   // Subsystem::RunOnce implicitly requires `this` subsystem.
-  //   return runOnce(
-  //       () -> {
-  //         /* one-time action goes here */
-  //       });
-  // }
-
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
-
-/*commands */
+ 
   public void stopExtender(){
     extenderCIM.set(ShoulderConstants.stopSpeed);
   }
@@ -65,39 +45,7 @@ public class extenderSubsystem extends SubsystemBase {
     extenderCIM.set(speed);
   }
 
-  //levels
-  // public boolean levelOne(double currentPos) {
-  //   //extenderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
-  //   //extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
-  //   if(currentPos != LevelConstants.cone_levelOneTarget_extender && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderCIM.set(0.3);
-  //   }
-  //   else if (currentPos != LevelConstants.cone_levelOneTarget_extender && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderCIM.set(0.3);
-  //   }
-  //   else {
-  //     SmartDashboard.putBoolean("Level One Arm position extender", true);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // public boolean levelTwo(double currentPos) {
-  //   //extenderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
-  //   //extenderEncoder.setPosition(LevelConstants.cone_levelOneTarget_extender);
-  //   if(currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderCIM.set(0.3);
-  //   }
-  //   else if (currentPos != LevelConstants.cone_levelTwoTarget_extender && currentPos > LevelConstants.cone_levelTwoTarget_shoulder){
-  //     extenderCIM.set(0.3);
-  //   }
-  //   else {
-  //     SmartDashboard.putBoolean("Level Two Arm position extender", true);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
+  
 
   @Override
   public void periodic() {

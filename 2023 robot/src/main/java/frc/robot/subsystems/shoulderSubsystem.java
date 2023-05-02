@@ -61,33 +61,6 @@ public class shoulderSubsystem extends SubsystemBase {
     shoulderNEO.burnFlash();
   }
 
-  /*public void c_levelOne(){
-    shoulderController.setReference(LevelConstants.cone_levelOneRef_shoulder, CANSparkMax.ControlType.kPosition);
-    shoulderEncoder.setPosition(LevelConstants.cone_levelOneTarget_shoulder);
-  }
-  */
-
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public CommandBase exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
-  }
-
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
-
-   /*states */
   public boolean shoulderSwitchState() {
     return shoulderSwitch.isPressed();
   }
@@ -129,8 +102,7 @@ public class shoulderSubsystem extends SubsystemBase {
 
 //levels
   public boolean levelOne(double currentPos) {
-    //shoulderController.setReference(currentPos, CANSparkMax.ControlType.kPosition);
-    //shoulderEncoder.setPosition(LevelConstants.cone_levelOneTarget_shoulder);
+  
     if(currentPos != LevelConstants.cone_levelOneTarget_shoulder && currentPos < LevelConstants.cone_levelTwoTarget_shoulder){
       shoulderNEO.set(0.3);
     }

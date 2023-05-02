@@ -4,6 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.Vector;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -93,6 +99,31 @@ public static class LevelConstants {
   public static final double cone_levelTwoTarget_extender = 0.0;
 }
 
+public static class DriveConstants{
+
+  public static final Rotation2d MODULE_ANGLE_LEFT = new Rotation2d(Math.PI / 4); 
+  public static final Rotation2d MODULE_ANGLE_RIGHT = new Rotation2d(-Math.PI / 4); 
+  public static final Translation2d[] MODULE_POSITIONS = new Translation2d[]{
+    new Translation2d(43.16, MODULE_ANGLE_LEFT),
+    new Translation2d(43.16, MODULE_ANGLE_LEFT),
+    new Translation2d(-43.16, MODULE_ANGLE_RIGHT),
+    new Translation2d(-43.16, MODULE_ANGLE_RIGHT)
+
+    //haven't calculated distance measurements yet 
+  };
+
+  public static final MecanumDriveKinematics DRIVE_KINEMATICS = new MecanumDriveKinematics(MODULE_POSITIONS[0], MODULE_POSITIONS[1], MODULE_POSITIONS[2], MODULE_POSITIONS[3]); 
+  public static final Vector<N3> ODOMETRY_STD_DEV = VecBuilder.fill(0.02, 0.02, 0.005); 
+
+
+  public static final Rotation2d[] MODULE_ROTATIONS = new Rotation2d[]{
+    Rotation2d.fromDegrees(-90), 
+    Rotation2d.fromDegrees(0),
+    Rotation2d.fromDegrees(180),
+    Rotation2d.fromDegrees(90)
+  };
+}
+
 /*
 //Estimate Distance
 public static class EstimateDistanceConstants
@@ -146,6 +177,10 @@ public static class ButtonConstants {
         public static final int rightXAxis = 4;
         public static final int rightYAxis = 5;
         public static final int buttonX = 1;
+    }
+
+    public final static class VisionConstants{
+      public static final Vector<N3> LIMELIGHT_STD_DEV = VecBuilder.fill(0.9, 0.9, 0.9);
     }
   
 }

@@ -4,13 +4,18 @@
 
 package frc.robot.subsystems;
 
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+
+import frc.robot.subsystems.NavXGyro;
 
 public class Chassis extends SubsystemBase {
   //Creates new Chassis
@@ -19,6 +24,8 @@ public class Chassis extends SubsystemBase {
   public WPI_VictorSPX rightFrontMotor;
   public WPI_VictorSPX rightRearMotor;
   private MecanumDrive driveTrain;
+
+ private final NavXGyro navXGyro; 
 
   public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   public long AprilTagID;
@@ -55,6 +62,13 @@ public class Chassis extends SubsystemBase {
     driveCartesian(0, speed, 0 );
   }
 
+public Rotation2d getRotation(){
+   return navXGyro.getRotation2d(); 
+  }
+
+
+
+  navXGyro = new NavXgyro(); 
 
 /*
  * -------------------------------------------------------------

@@ -34,9 +34,8 @@ import java.util.Arrays;
 public class Limelight extends Vision{
 
 
-
-
     private static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); 
+    
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry ta = table.getEntry("ta");
@@ -52,7 +51,7 @@ public class Limelight extends Vision{
         botPose = table.getDoubleArrayTopic("botpose_wpiblue").subscribe(null);
         cl = table.getDoubleTopic("cl").subscribe(0);
         tl = table.getDoubleTopic("tl").subscribe(0);
-        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, null, null, null);
+        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, null, Constants.DriveConstants.MODULE_POSITIONS, null);
     
     }
 

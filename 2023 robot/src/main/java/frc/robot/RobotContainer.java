@@ -18,8 +18,8 @@ import frc.robot.subsystems.extenderSubsystem;
 import com.pathplanner.lib.server.PathPlannerServer; 
 
 public class RobotContainer {
-  public final Chassis chassis = new Chassis();
-  public final GripperSubsystem gripper = new GripperSubsystem();
+  public final static Chassis chassis = new Chassis();
+  public final static GripperSubsystem gripper = new GripperSubsystem();
 
   //creates manipulator controller
   public final static XboxController manipulator = new XboxController(ControllerConstants.manipulatorPort);

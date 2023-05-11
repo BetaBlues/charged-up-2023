@@ -51,7 +51,7 @@ public class Limelight extends Vision{
         botPose = table.getDoubleArrayTopic("botpose_wpiblue").subscribe(null);
         cl = table.getDoubleTopic("cl").subscribe(0);
         tl = table.getDoubleTopic("tl").subscribe(0);
-        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, null, Constants.DriveConstants.MODULE_POSITIONS, null);
+        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, RobotContainer.chassis.getRotation(), Constants.DriveConstants.WHEEL_POSITIONS, new Pose2d());
     
     }
 

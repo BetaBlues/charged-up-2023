@@ -7,11 +7,13 @@ package frc.robot;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelPositions;
 import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -103,6 +105,12 @@ public static class LevelConstants {
 
 public static class DriveConstants{
 
+  public static final Encoder m_frontRightEncoder = new Encoder(0,1);
+  public static final Encoder m_frontLeftEncoder = new Encoder(0,3);
+  public static final Encoder m_backRightEncoder = new Encoder(0,5);
+  public static final Encoder m_backLeftEncoder = new Encoder(0,7);
+
+
   public static final Rotation2d MODULE_ANGLE_LEFT = new Rotation2d(Math.PI / 4); 
   public static final Rotation2d MODULE_ANGLE_RIGHT = new Rotation2d(-Math.PI / 4); 
   public static final Translation2d[] MODULE_POSITIONS = new Translation2d[]{
@@ -115,7 +123,7 @@ public static class DriveConstants{
     
   };
 
-  public static final MecanumDriveWheelPositions = new MecanumDriveWheelPositions(); 
+  public static final MecanumDriveWheelPositions WHEEL_POSITIONS = new MecanumDriveWheelPositions(m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(), m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance()); 
   //must be in meters**
 
   
@@ -126,7 +134,9 @@ public static class DriveConstants{
 
 MecanumDriveOdometry MECANUM_ODOMETRY = new MecanumDriveOdometry(DRIVE_KINEMATICS,
  MODULE_ANGLE_LEFT, 
- null);
+ WHEEL_POSITIONS, 
+ new Pose2d(0.5, 5, new Rotation2d()));
+ //starting position
 
   public static final Rotation2d[] MODULE_ROTATIONS = new Rotation2d[]{
     Rotation2d.fromDegrees(-90), 

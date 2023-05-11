@@ -9,6 +9,8 @@ import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelPositions;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -104,17 +106,27 @@ public static class DriveConstants{
   public static final Rotation2d MODULE_ANGLE_LEFT = new Rotation2d(Math.PI / 4); 
   public static final Rotation2d MODULE_ANGLE_RIGHT = new Rotation2d(-Math.PI / 4); 
   public static final Translation2d[] MODULE_POSITIONS = new Translation2d[]{
-    new Translation2d(43.16, MODULE_ANGLE_LEFT),
-    new Translation2d(43.16, MODULE_ANGLE_LEFT),
-    new Translation2d(-43.16, MODULE_ANGLE_RIGHT),
-    new Translation2d(-43.16, MODULE_ANGLE_RIGHT)
+    new Translation2d(0.210152, MODULE_ANGLE_LEFT), //front left
+    new Translation2d(-0.210152, MODULE_ANGLE_LEFT), //back left
+    new Translation2d(0.210152, MODULE_ANGLE_RIGHT), //front right
+    new Translation2d(-0.210152, MODULE_ANGLE_RIGHT) //front left
+    //32 * 27.25 in w/o bumpers . probably off by some inches. no idea if the negatives are right tbh 
 
-    //haven't calculated distance measurements yet 
+    
   };
 
-  public static final MecanumDriveKinematics DRIVE_KINEMATICS = new MecanumDriveKinematics(MODULE_POSITIONS[0], MODULE_POSITIONS[1], MODULE_POSITIONS[2], MODULE_POSITIONS[3]); 
-  public static final Vector<N3> ODOMETRY_STD_DEV = VecBuilder.fill(0.02, 0.02, 0.005); 
+  public static final MecanumDriveWheelPositions = new MecanumDriveWheelPositions(); 
+  //must be in meters**
 
+  
+
+  public static final MecanumDriveKinematics DRIVE_KINEMATICS = new MecanumDriveKinematics(MODULE_POSITIONS[0], MODULE_POSITIONS[2], MODULE_POSITIONS[1], MODULE_POSITIONS[3]); 
+  public static final Vector<N3> ODOMETRY_STD_DEV = VecBuilder.fill(0.02, 0.02, 0.005); 
+//um. odometry std dev just substitue values for now
+
+MecanumDriveOdometry MECANUM_ODOMETRY = new MecanumDriveOdometry(DRIVE_KINEMATICS,
+ MODULE_ANGLE_LEFT, 
+ null);
 
   public static final Rotation2d[] MODULE_ROTATIONS = new Rotation2d[]{
     Rotation2d.fromDegrees(-90), 

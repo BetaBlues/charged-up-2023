@@ -45,7 +45,7 @@ public class Limelight extends Vision{
     private final DoubleSubscriber tl; 
 
     private final MecanumDrivePoseEstimator poseEstimator;
-    private MecanumDriveWheelPositions[] wheelPositions;  
+   
 
     public Limelight(){
         botPose = table.getDoubleArrayTopic("botpose_wpiblue").subscribe(null);

@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -105,46 +107,66 @@ public static class LevelConstants {
 
 public static class DriveConstants{
 
+public static final AHRS NavX = new AHRS(); //makes a NavX gyro obj
+
   public static final Encoder m_frontRightEncoder = new Encoder(0,1);
   public static final Encoder m_frontLeftEncoder = new Encoder(0,3);
   public static final Encoder m_backRightEncoder = new Encoder(0,5);
   public static final Encoder m_backLeftEncoder = new Encoder(0,7);
-
+//encoders that would attach to our drivetrain motors -- measures rotation
+//needed for position 
+//channels are still technically unknown because that depends on wiring -- just put substitute nums in as parameters
 
   public static final Rotation2d MODULE_ANGLE_LEFT = new Rotation2d(Math.PI / 4); 
   public static final Rotation2d MODULE_ANGLE_RIGHT = new Rotation2d(-Math.PI / 4); 
+//makes a Rotation2d w/ angle of pi/4 and -pi/4 respectively
+//Rotation2d - rotation in 2d coord frame rep by a point on unit circle (cos and sin)
+
   public static final Translation2d[] MODULE_POSITIONS = new Translation2d[]{
     new Translation2d(0.210152, MODULE_ANGLE_LEFT), //front left
     new Translation2d(-0.210152, MODULE_ANGLE_LEFT), //back left
     new Translation2d(0.210152, MODULE_ANGLE_RIGHT), //front right
     new Translation2d(-0.210152, MODULE_ANGLE_RIGHT) //front left
-    //32 * 27.25 in w/o bumpers . probably off by some inches. no idea if the negatives are right tbh 
+    //32 * 27.25 in w/o bumpers . probably off by some inches
 
+    //translation2d array that contains the positions of the wheels respective to the center of rotation (physical center) of the robot
+    //transation2d is a vector [x, y] on 2d coord system 
+    //distance is in meters
     
   };
 
   public static final MecanumDriveWheelPositions WHEEL_POSITIONS = new MecanumDriveWheelPositions(m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(), m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance()); 
-  //must be in meters**
+  //initial positions of the wheels 
+//.getDistance() gets the distance the robot has drive since the last reset for the encoders
+//so in start auto this should be zero? bc it resets
+//odometry is generally pretty accurate during auto but teleop ssince it gets bumped around by other robots etc it drifts
 
   
 
   public static final MecanumDriveKinematics DRIVE_KINEMATICS = new MecanumDriveKinematics(MODULE_POSITIONS[0], MODULE_POSITIONS[2], MODULE_POSITIONS[1], MODULE_POSITIONS[3]); 
-  public static final Vector<N3> ODOMETRY_STD_DEV = VecBuilder.fill(0.02, 0.02, 0.005); 
-//um. odometry std dev just substitue values for now
+//creates a mec drive kinematics obj which takes the module positions that can convert chassis velo into individ wheel speeds
 
-MecanumDriveOdometry MECANUM_ODOMETRY = new MecanumDriveOdometry(DRIVE_KINEMATICS,
- MODULE_ANGLE_LEFT, 
+
+//mec drive odometry can be used to track position of mec drive on field!
+public static final MecanumDriveOdometry MECANUM_ODOMETRY = new MecanumDriveOdometry(DRIVE_KINEMATICS,
+ NavX.getRotation2d(), //angle reported by gyro
  WHEEL_POSITIONS, 
- new Pose2d(0.5, 5, new Rotation2d()));
- //starting position
-
-  public static final Rotation2d[] MODULE_ROTATIONS = new Rotation2d[]{
+ new Pose2d(0.5, 3, new Rotation2d()));
+ //Pose2d of starting position -- just an estimate of about where we would start on the field-- sub w more acc values later
+//the fourth argument (starting pos) is technically optional-- by default it would start at x = 0, y = 0. theta = 0
+ 
+ //i don't think we need this bc of mecanum drive seems like a swerve thing? 
+/*public static final Rotation2d[] MODULE_ROTATIONS = new Rotation2d[]{
     Rotation2d.fromDegrees(-90), 
     Rotation2d.fromDegrees(0),
     Rotation2d.fromDegrees(180),
     Rotation2d.fromDegrees(90)
   };
+
+*/ 
 }
+
+
 
 /*
 //Estimate Distance

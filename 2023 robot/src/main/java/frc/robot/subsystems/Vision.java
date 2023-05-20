@@ -7,6 +7,8 @@ import edu.wpi.first.math.numbers.N3;
 
 import java.util.Optional;
 
+//abstract classes are like a template 
+//java and abstraction are like dating tbh 
 
 public abstract class Vision {
     public abstract Optional<Measurement> getMeasurement(); 

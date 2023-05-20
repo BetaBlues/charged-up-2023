@@ -14,10 +14,11 @@ import frc.robot.RobotContainer;
 
 public class NavXGyro implements Gyro{
     private final AHRS navX = new AHRS(); 
-   
+   //new navX obj
 
     public NavXGyro(){
-       navX.calibrate(); 
+       navX.calibrate();
+       //calibrates 
         reset(); 
     }
 

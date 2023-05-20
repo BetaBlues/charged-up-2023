@@ -164,6 +164,16 @@ public static final MecanumDriveOdometry MECANUM_ODOMETRY = new MecanumDriveOdom
   };
 
 */ 
+
+//FIX: actually figure out the values
+  public static final double MAX_SPEED = 10; 
+  public static final double MAX_ACC = 2.5; 
+  public static final PathConstraints DEFAULT_PATH_CONSTRAINTS = new PathConstraints(MAX_SPEED, MAX_ACC);
+
+//FIX: PID values except idk what they actually should be
+  public static final double P = 4;
+  public static final double I = 0;
+  public static final double D = 0.3; 
 }
 
 
@@ -226,6 +236,7 @@ public static class ButtonConstants {
     public final static class VisionConstants{
       public static final Vector<N3> LIMELIGHT_STD_DEV = VecBuilder.fill(0.9, 0.9, 0.9);
     }
+
   
 }
 

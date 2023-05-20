@@ -35,14 +35,31 @@ public class Limelight extends Vision{
 
 
     private static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight"); 
+    //networktables is like a messaging system (it actually is -- called a publish-subscribe messaging system)
+    //you publish values to topics on robot, driver station, etc, and they can do stuff with those values and send them back
     
+    //topic: data channel; have fixed data type
+    //publisher: defines topic and makes and sends timestamped data values
+    //subscriber: receives timestamped data value updates to >= topics
+    //entry: publisher + subscriber; 
+    //property: metadata about a topic stored 
+
+
     NetworkTableEntry tx = table.getEntry("tx");
+    //horizontal offset from crosshair to target
     NetworkTableEntry ty = table.getEntry("ty");
+    //vertical offset from crosshair to target
     NetworkTableEntry ta = table.getEntry("ta");
+    //target area 
+
+    //gets the pair of pub and sub from limelight table 
+    
 
     private final DoubleArraySubscriber botPose; 
     private final DoubleSubscriber cl; 
+    //capture latency - time btwn end of exposure of the mid row of Limelight's image sensor and beginning of processing pipeline
     private final DoubleSubscriber tl; 
+    //pipeline's latency contribution
 
     private final MecanumDrivePoseEstimator poseEstimator;
    
@@ -51,13 +68,15 @@ public class Limelight extends Vision{
         botPose = table.getDoubleArrayTopic("botpose_wpiblue").subscribe(null);
         cl = table.getDoubleTopic("cl").subscribe(0);
         tl = table.getDoubleTopic("tl").subscribe(0);
-        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, RobotContainer.chassis.getRotation(), Constants.DriveConstants.WHEEL_POSITIONS, new Pose2d());
+        poseEstimator = new MecanumDrivePoseEstimator(Constants.DriveConstants.DRIVE_KINEMATICS, 
+        RobotContainer.chassis.getRotation(), Constants.DriveConstants.WHEEL_POSITIONS, new Pose2d());
     
     }
 
-
+//optional - container obj which may or may not contain a non-null value 
     public Optional<Vision.Measurement> getMeasurement(){
         TimestampedDoubleArray[] updates = botPose.readQueue(); 
+        //arr of all value changes since last call to readQueue
 
         if(updates.length == 0){
             return Optional.empty(); 
@@ -77,7 +96,7 @@ public class Limelight extends Vision{
         double pitch = Units.degreesToRadians(update.value[4]);
         double yaw = Units.degreesToRadians(update.value[5]);
 
-        double latency = cl.get() + tl.get(); 
+        double latency = cl.get() + tl.get(); //total latency
 
         double timestamp = (update.timestamp * 1e-6) - (latency * 1e-3);
         Pose3d pose = new Pose3d(new Translation3d(x, y, z), new Rotation3d(roll, pitch, yaw));
@@ -95,10 +114,12 @@ public class Limelight extends Vision{
         double x = tx.getDouble(0.0);
         double y = ty.getDouble(0.0);
         double area = ta.getDouble(0.0);
+        //gets values periodically
 
         SmartDashboard.putNumber("LimelightX", x);
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
+        //puts this to smartdashboard periodically
 
     }
 
@@ -112,6 +133,10 @@ public class Limelight extends Vision{
 
     public Double getTargetArea() {
         return ta.getDouble(0.0);
+    }
+
+    public Pose2d getEstimatedPose(){
+        return poseEstimator.getEstimatedPosition(); 
     }
 
 }
